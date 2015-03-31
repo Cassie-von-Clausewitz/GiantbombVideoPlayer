@@ -6,6 +6,8 @@
         <item name="android:actionBarStyle">@style/ActionBar</item>
 
         <item name="colorPrimary">@color/teal_400</item>
+        <item name="colorPrimaryDark">@color/teal_600</item>
+        <!-- <item name="android:navigationBarColor">@color/teal_400</item> -->
         <item name="colorAccent">@color/cyan_400</item>
 
     </style>

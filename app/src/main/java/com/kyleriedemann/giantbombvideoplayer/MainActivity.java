@@ -1,66 +1,107 @@
 package com.kyleriedemann.giantbombvideoplayer;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.BaseAdapter;
 
+import com.kyleriedemann.giantbombvideoplayer.Fragments.DefaultFragment;
+import com.kyleriedemann.giantbombvideoplayer.NavigationDrawer.NavigationDrawerAdapter;
+import com.kyleriedemann.giantbombvideoplayer.NavigationDrawer.NavigationDrawerItem;
 
-public class MainActivity extends ActionBarActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class MainActivity extends DrawerLayoutActivity {
+    private static final String TAG_ACTIVE_FRAGMENT = "fragment_active";
+
+    // constants that represent the fragments
+    public static final int TEST = 0;
+    private DefaultFragment activeFragment = null;
+
+    // more nav drawer stuff
+    private NavigationDrawerAdapter mNavDrawerAdapter;
+    private ArrayList<NavigationDrawerItem> navigationDrawerItems;
+    private String[] navMenuTitles;
+    private HashMap<Integer, String> fragmentTitles;
+    private Bundle currentBundle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
+    public void init() {
+
+        // retrieve array from XML
+        TypedArray navigationIcons = getResources().obtainTypedArray(R.array.navigation_drawer_icons);
+        navMenuTitles = getResources().getStringArray(R.array.navigation_drawer_items);
+        navigationDrawerItems = new ArrayList<NavigationDrawerItem>();
+
+        // should add items to the ArrayList of NavigationDrawerItems4
+        for(int i = 0; i < navMenuTitles.length; i++) {
+            // populate the navigation drawer array
+            navigationDrawerItems.add(new NavigationDrawerItem(navMenuTitles[i], navigationIcons.getDrawable(i)));
         }
+        // recycle the typed array when done with it
+        navigationIcons.recycle();
+
+        mNavDrawerAdapter = new NavigationDrawerAdapter(this, navigationDrawerItems);
+
+        // we need a HashMap to map the Titles of a fragment that are outside the nav drawer
+        //fragmentTitles = new HashMap<Integer, String>();
+        //ex:
+        //fragmentTitles.put(NEW_FRAGMENT, getString(R.string.string_id));
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void restoreFragment(Bundle savedInstanceState) {
+        //restore instance of the fragment
+        activeFragment = (DefaultFragment) getFragmentManager().getFragment(savedInstanceState, "activeFragment");
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void displayView(int position, Bundle fragmentBundle) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if(activeFragment != null) {
+            if(fragmentBundle != null) {
+                currentBundle = fragmentBundle;
+                activeFragment.setArguments(fragmentBundle);
+            }
+
+            fragmentTransaction.setCustomAnimations(R.animator.alpha_in, R.animator.alpha_out, // animations for fragment in
+                    R.animator.alpha_in, R.animator.alpha_out) // animations for fragment out
+                    .replace(R.id.fragment_container, activeFragment, TAG_ACTIVE_FRAGMENT).commit(); // the replace what is inside the FrameLayout with our activeFragment
+
+            // update the selected item and title
+            if(position >= 0) {
+                getDrawerList().setItemChecked(position, true); // we set the item click in the drawer to active
+                getDrawerList().setSelection(position);
+                setTitle(navMenuTitles[position]); // change the title of the action bar to the fragment
+            } else {
+                if(fragmentBundle == null) {
+                    setTitle(fragmentTitles.get(position)); // same as above
+                } else {
+                    setTitle("Check In"); // fall back to default fragment name
+                }
+            }
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * override to change log tag
      */
-    public static class PlaceholderFragment extends Fragment {
+    @Override
+    public String getLogTag() { return "MainActivity"; }
 
-        public PlaceholderFragment() {
-        }
+    @Override
+    protected BaseAdapter getAdapter() { return mNavDrawerAdapter; }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (activeFragment.isAdded()) {
+            getFragmentManager().putFragment(outState, "activeFragment", activeFragment);
         }
     }
 }

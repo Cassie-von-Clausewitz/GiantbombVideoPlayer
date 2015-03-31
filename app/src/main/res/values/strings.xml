@@ -2,4 +2,14 @@
     <string name="app_name">Giantbomb Video Player</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="api_key">9370044ca3820c6695420ea259a2c484730ff5a2</string>
+    <string name="format">json</string>
+
+    <string-array name="navigation_drawer_items">
+        <item>Test</item>
+    </string-array>
+
+    <array name="navigation_drawer_icons">
+        <item>@drawable/ic_launcher</item>
+    </array>
 </resources>
