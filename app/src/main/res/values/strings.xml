@@ -6,7 +6,7 @@
     <string name="format">json</string>
 
     <string-array name="navigation_drawer_items">
-        <item>Test</item>
+        <item>Videos</item>
     </string-array>
 
     <array name="navigation_drawer_icons">
