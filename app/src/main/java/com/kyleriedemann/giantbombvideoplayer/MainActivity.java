@@ -30,7 +30,6 @@ public class MainActivity extends DrawerLayoutActivity {
 
     @Override
     public void init() {
-
         // retrieve array from XML
         TypedArray navigationIcons = getResources().obtainTypedArray(R.array.navigation_drawer_icons);
         navMenuTitles = getResources().getStringArray(R.array.navigation_drawer_items);

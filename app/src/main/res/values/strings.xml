@@ -12,4 +12,5 @@
     <array name="navigation_drawer_icons">
         <item>@drawable/ic_launcher</item>
     </array>
+    <string name="title_activity_video_detail">VideoDetailActivity</string>
 </resources>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
 
-    <ListView
-        android:id="@+id/video_listview"
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
+        android:id="@+id/videolist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        </ListView>
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        />
+
 
 </LinearLayout>

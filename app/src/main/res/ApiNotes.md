@@ -8,7 +8,7 @@
 
 ## Sample Requests
 
-[list of recent videos](http://www.giantbomb.com/api/videos?api_key={api_key}&format=json)
+[list of recent videos](http://www.giantbomb.com/api/videos?api_key=9370044ca3820c6695420ea259a2c484730ff5a2&format=json)
 
 truncated response
 

@@ -5,6 +5,10 @@
 
 <resources>
 
+  <color name="primary">@color/teal_400</color>
+  <color name="primary_dark">@color/teal_600</color>
+  <color name="accent">@color/cyan_400</color>
+
   <color name="red_50">#fde0dc</color>
   <color name="red_100">#f9bdbb</color>
   <color name="red_200">#f69988</color>

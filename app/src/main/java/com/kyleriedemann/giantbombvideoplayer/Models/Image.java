@@ -2,9 +2,12 @@ package com.kyleriedemann.giantbombvideoplayer.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 /**
  * Created by kyle on 3/31/15.
  */
+@Parcel
 public class Image {
 
     @SerializedName("icon_url")
