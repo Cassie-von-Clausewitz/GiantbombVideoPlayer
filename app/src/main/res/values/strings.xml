@@ -2,15 +2,26 @@
     <string name="app_name">Giantbomb Video Player</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="api_key">9370044ca3820c6695420ea259a2c484730ff5a2</string>
+    <string name="premium_api_key">9370044ca3820c6695420ea259a2c484730ff5a2</string>
+    <string name="standard_api_key">266edfe59de08f1e8e42e36ac1cc34b3e44ff766</string>
     <string name="format">json</string>
+
+    <string name="auth_hint">Enter Code Here</string>
+    <string name="auth_explanation">To enjoy premium videos you must authenticate by visiting the link bellow. Then simply enter the code here and click the button to confirm.</string>
+    <string name="auth_url">http://www.giantbomb.com/boxee/</string>
+    <string name="api_key_request">https://www.giantbomb.com/api/validate?link_code=</string>
+
+    <string name="title_activity_video_detail">VideoDetailActivity</string>
+    <string name="title_activity_video_web_view">WebViewActivity</string>
+
 
     <string-array name="navigation_drawer_items">
         <item>Videos</item>
+        <item>Authentication</item>
     </string-array>
 
     <array name="navigation_drawer_icons">
         <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
     </array>
-    <string name="title_activity_video_detail">VideoDetailActivity</string>
 </resources>

@@ -1,13 +1,13 @@
 package com.kyleriedemann.giantbombvideoplayer.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.kyleriedemann.giantbombvideoplayer.Models.Result;
 import com.kyleriedemann.giantbombvideoplayer.Models.Video;
@@ -21,13 +21,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
-import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by kyle on 3/31/15.
@@ -67,10 +63,13 @@ public class VideoListFragment extends DefaultFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-                RestAdapter restAdapter = GiantbombApiClient.buildRestAdapter(false);
+            RestAdapter restAdapter = GiantbombApiClient.buildRestAdapter(false);
             GiantbombApiClient.Videos giantbombApiClient = restAdapter.create(GiantbombApiClient.Videos.class);
 
-            Result videos = giantbombApiClient.getVideos("9370044ca3820c6695420ea259a2c484730ff5a2", "json");
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            String apiKey = sharedPref.getString("API_KEY", "No Saved API Key");
+
+            Result videos = giantbombApiClient.getVideos(apiKey, "json");
 
             videoCards = new ArrayList<Card>();
             for (Video v : videos.getResults()){

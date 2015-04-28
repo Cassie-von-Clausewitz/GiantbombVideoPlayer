@@ -1,9 +1,6 @@
 package com.kyleriedemann.giantbombvideoplayer.Network;
 
 import com.kyleriedemann.giantbombvideoplayer.Models.Result;
-import com.kyleriedemann.giantbombvideoplayer.Models.Video;
-
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -29,7 +26,14 @@ public class GiantbombApiClient {
                 @Query("format") String format,
                 Callback<Result> videoCallback
         );
+    }
 
+    public interface Key {
+        @GET("/validate")
+        public com.kyleriedemann.giantbombvideoplayer.Models.Key getApiKey(
+                @Query("link_code") String linkCode,
+                @Query("format") String format
+        );
     }
 
     public static RestAdapter buildRestAdapter(boolean debug) {

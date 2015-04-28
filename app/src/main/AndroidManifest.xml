@@ -28,6 +28,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kyleriedemann.giantbombvideoplayer.MainActivity" />
         </activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/title_activity_video_detail"
+            android:screenOrientation="landscape"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kyleriedemann.giantbombvideoplayer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

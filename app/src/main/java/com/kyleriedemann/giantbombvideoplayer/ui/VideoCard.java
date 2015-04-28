@@ -12,6 +12,7 @@ import com.kyleriedemann.giantbombvideoplayer.Models.Video;
 import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity;
 import com.kyleriedemann.giantbombvideoplayer.R;
 import com.kyleriedemann.giantbombvideoplayer.VideoViewActivity;
+import com.kyleriedemann.giantbombvideoplayer.WebViewActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -21,7 +22,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by kyle on 4/21/15.
  */
-public class VideoCard extends Card implements Card.OnCardClickListener {
+public class VideoCard extends Card implements Card.OnCardClickListener, Card.OnLongCardClickListener {
 
     Video v;
     @InjectView(R.id.video_thumb)
@@ -35,6 +36,7 @@ public class VideoCard extends Card implements Card.OnCardClickListener {
         super(context, R.layout.video_card);
         this.v = v;
         setOnClickListener(this);
+        setOnLongClickListener(this);
     }
 
     @Override
@@ -63,6 +65,7 @@ public class VideoCard extends Card implements Card.OnCardClickListener {
     @Override
     public void onClick(Card card, View view) {
         Intent i = new Intent(getContext(), VideoViewActivity.class);
+//        Intent i = new Intent(getContext(), WebViewActivity.class);
         if(Connectivity.isConnectedFast(getContext())) {
             i.putExtra("url", v.getHighUrl());
         } else {
@@ -70,5 +73,20 @@ public class VideoCard extends Card implements Card.OnCardClickListener {
         }
 
         getContext().startActivity(i);
+    }
+
+    @Override
+    public boolean onLongClick(Card card, View view) {
+//        Intent i = new Intent(getContext(), VideoViewActivity.class);
+        Intent i = new Intent(getContext(), WebViewActivity.class);
+        if(Connectivity.isConnectedFast(getContext())) {
+            i.putExtra("url", v.getHighUrl());
+        } else {
+            i.putExtra("url", v.getLowUrl());
+        }
+
+        getContext().startActivity(i);
+
+        return true;
     }
 }

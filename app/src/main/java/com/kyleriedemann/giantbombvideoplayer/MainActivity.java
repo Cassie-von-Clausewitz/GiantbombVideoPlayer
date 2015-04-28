@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.BaseAdapter;
 
+import com.kyleriedemann.giantbombvideoplayer.Fragments.AuthenticationFragment;
 import com.kyleriedemann.giantbombvideoplayer.Fragments.DefaultFragment;
 import com.kyleriedemann.giantbombvideoplayer.Fragments.VideoListFragment;
 import com.kyleriedemann.giantbombvideoplayer.NavigationDrawer.NavigationDrawerAdapter;
@@ -19,6 +20,7 @@ public class MainActivity extends DrawerLayoutActivity {
 
     // constants that represent the fragments
     public static final int VIDEO = 0;
+    public static final int AUTH = 1;
     private DefaultFragment activeFragment = null;
 
     // more nav drawer stuff
@@ -66,6 +68,10 @@ public class MainActivity extends DrawerLayoutActivity {
         switch (position) {
             case VIDEO:
                 activeFragment = new VideoListFragment();
+                clearBackStack();
+                break;
+            case AUTH:
+                activeFragment = new AuthenticationFragment();
                 clearBackStack();
                 break;
             default:
