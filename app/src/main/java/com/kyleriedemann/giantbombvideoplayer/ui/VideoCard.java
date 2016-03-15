@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.ui;
+package com.kyleriedemann.giantbombvideoplayer.UI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.kyleriedemann.giantbombvideoplayer.Models.Video;
 import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.VideoViewActivity;
-import com.kyleriedemann.giantbombvideoplayer.WebViewActivity;
+import com.kyleriedemann.giantbombvideoplayer.Video.VideoViewActivity;
+import com.kyleriedemann.giantbombvideoplayer.Video.WebViewActivity;
 import com.squareup.picasso.Picasso;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
@@ -25,16 +25,17 @@ import it.gmariotti.cardslib.library.internal.Card;
 public class VideoCard extends Card implements Card.OnCardClickListener, Card.OnLongCardClickListener {
 
     Video v;
-    @InjectView(R.id.video_thumb)
+    @Bind(R.id.video_thumb)
     ImageView videoThumb;
-    @InjectView(R.id.video_name)
+    @Bind(R.id.video_name)
     TextView videoName;
-    @InjectView(R.id.deck)
+    @Bind(R.id.deck)
     TextView deck;
 
     public VideoCard(Context context, Video v) {
         super(context, R.layout.video_card);
         this.v = v;
+
         setOnClickListener(this);
         setOnLongClickListener(this);
     }
@@ -42,7 +43,11 @@ public class VideoCard extends Card implements Card.OnCardClickListener, Card.On
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
-        ButterKnife.inject(this, view);
+
+        videoThumb = ButterKnife.findById(view, R.id.video_thumb);
+        videoName = ButterKnife.findById(view, R.id.video_name);
+        deck = ButterKnife.findById(view, R.id.deck);
+
         if(v != null) {
             videoName.setText(v.getName());
 

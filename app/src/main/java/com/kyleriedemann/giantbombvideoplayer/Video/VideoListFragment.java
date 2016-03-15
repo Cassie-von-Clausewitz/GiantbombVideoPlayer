@@ -19,8 +19,8 @@ import com.kyleriedemann.giantbombvideoplayer.UI.VideoCard;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
@@ -31,7 +31,7 @@ import retrofit.RestAdapter;
  */
 public class VideoListFragment extends DefaultFragment {
 
-    @InjectView(R.id.videolist)
+    @Bind(R.id.videolist)
     CardRecyclerView videoList;
 
     CardArrayRecyclerViewAdapter mVideoAdapter;
@@ -46,7 +46,9 @@ public class VideoListFragment extends DefaultFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ButterKnife.inject(this, view);
+
+        videoList = ButterKnife.findById(view, R.id.videolist);
+
         videoList.setHasFixedSize(true);
         videoList.setLayoutManager(new LinearLayoutManager(getActivity()));
 

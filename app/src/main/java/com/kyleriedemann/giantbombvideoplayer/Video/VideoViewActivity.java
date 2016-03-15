@@ -11,13 +11,13 @@ import android.widget.VideoView;
 
 import com.kyleriedemann.giantbombvideoplayer.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class VideoViewActivity extends AppCompatActivity {
 
-    @InjectView(R.id.video_view)
+    @Bind(R.id.video_view)
     VideoView videoView;
     MediaController mediaController;
 
@@ -25,9 +25,7 @@ public class VideoViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
-        ButterKnife.inject(this);
-
-
+        ButterKnife.bind(this);
 
 //        getDecorView().setOnSystemUiVisibilityChangeListener(this);
         mediaController = new MediaController(this);

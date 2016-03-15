@@ -31,6 +31,8 @@ public class Image {
     @SerializedName("tiny_url")
     String tinyImageUrl;
 
+    public Image() {}
+
     public Image(String iconUrl) {
     }
 

@@ -45,7 +45,7 @@ public class AuthenticationFragment extends DefaultFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         Button authRequestButton = (Button) getActivity().findViewById(R.id.button_authenticaion);
         authRequestButton.setOnClickListener(new View.OnClickListener() {
