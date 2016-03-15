@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer;
+package com.kyleriedemann.giantbombvideoplayer.Video;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import com.kyleriedemann.giantbombvideoplayer.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

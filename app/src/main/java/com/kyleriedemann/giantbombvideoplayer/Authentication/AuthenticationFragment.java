@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Fragments;
+package com.kyleriedemann.giantbombvideoplayer.Authentication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.kyleriedemann.giantbombvideoplayer.Models.Key;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
 import com.kyleriedemann.giantbombvideoplayer.R;
+import com.kyleriedemann.giantbombvideoplayer.UI.DefaultFragment;
 
 import butterknife.ButterKnife;
 import retrofit.RestAdapter;

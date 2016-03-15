@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Fragments;
+package com.kyleriedemann.giantbombvideoplayer.Video;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,7 +13,8 @@ import com.kyleriedemann.giantbombvideoplayer.Models.Result;
 import com.kyleriedemann.giantbombvideoplayer.Models.Video;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.ui.VideoCard;
+import com.kyleriedemann.giantbombvideoplayer.UI.DefaultFragment;
+import com.kyleriedemann.giantbombvideoplayer.UI.VideoCard;
 
 import java.util.ArrayList;
 import java.util.List;

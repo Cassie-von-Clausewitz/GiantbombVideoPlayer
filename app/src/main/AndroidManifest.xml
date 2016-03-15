@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VideoViewActivity"
+            android:name=".Video.VideoViewActivity"
             android:label="@string/title_activity_video_detail"
             android:screenOrientation="landscape"
             android:parentActivityName=".MainActivity" >
@@ -29,7 +29,7 @@
                 android:value="com.kyleriedemann.giantbombvideoplayer.MainActivity" />
         </activity>
         <activity
-            android:name=".WebViewActivity"
+            android:name=".Video.WebViewActivity"
             android:label="@string/title_activity_video_detail"
             android:screenOrientation="landscape"
             android:parentActivityName=".MainActivity" >

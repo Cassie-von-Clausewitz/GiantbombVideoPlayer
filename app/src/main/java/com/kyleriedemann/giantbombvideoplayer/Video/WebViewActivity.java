@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer;
+package com.kyleriedemann.giantbombvideoplayer.Video;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.kyleriedemann.giantbombvideoplayer.R;
 
 /**
  * Created by kyle on 4/27/15.
