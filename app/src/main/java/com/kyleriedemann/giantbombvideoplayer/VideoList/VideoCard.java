@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.UI;
+package com.kyleriedemann.giantbombvideoplayer.VideoList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.kyleriedemann.giantbombvideoplayer.Models.Video;
 import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.Video.VideoViewActivity;
-import com.kyleriedemann.giantbombvideoplayer.Video.WebViewActivity;
+import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.VideoViewActivity;
+import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.WebViewActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;

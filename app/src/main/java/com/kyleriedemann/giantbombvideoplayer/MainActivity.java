@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.widget.BaseAdapter;
 
 import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationFragment;
-import com.kyleriedemann.giantbombvideoplayer.UI.BaseFragment;
-import com.kyleriedemann.giantbombvideoplayer.UI.DrawerLayoutActivity;
-import com.kyleriedemann.giantbombvideoplayer.UI.NavigationDrawerAdapter;
-import com.kyleriedemann.giantbombvideoplayer.UI.NavigationDrawerItem;
-import com.kyleriedemann.giantbombvideoplayer.Video.VideoListFragment;
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.Base.DrawerLayoutActivity;
+import com.kyleriedemann.giantbombvideoplayer.Base.NavigationDrawerAdapter;
+import com.kyleriedemann.giantbombvideoplayer.Base.NavigationDrawerItem;
+import com.kyleriedemann.giantbombvideoplayer.VideoList.VideoListFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

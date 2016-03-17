@@ -22,7 +22,7 @@ import com.kyleriedemann.giantbombvideoplayer.Models.Key;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
 import com.kyleriedemann.giantbombvideoplayer.Network.ServiceGenerator;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.UI.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
 import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
 import butterknife.ButterKnife;

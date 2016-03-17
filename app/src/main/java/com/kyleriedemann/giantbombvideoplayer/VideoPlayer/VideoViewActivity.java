@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Video;
+package com.kyleriedemann.giantbombvideoplayer.VideoPlayer;
 
 import android.net.Uri;
 import android.os.Bundle;

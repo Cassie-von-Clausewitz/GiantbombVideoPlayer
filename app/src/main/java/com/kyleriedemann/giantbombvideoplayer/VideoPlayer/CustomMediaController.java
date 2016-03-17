@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Video;
+package com.kyleriedemann.giantbombvideoplayer.VideoPlayer;
 
 import android.app.Activity;
 import android.content.Context;

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Video.VideoViewActivity">
+    tools:context=".VideoPlayer.VideoViewActivity">
 
     <VideoView
         android:id="@+id/video_view"
