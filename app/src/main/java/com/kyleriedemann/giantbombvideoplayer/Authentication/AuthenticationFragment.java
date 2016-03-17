@@ -3,8 +3,8 @@ package com.kyleriedemann.giantbombvideoplayer.Authentication;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,22 +16,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kyleriedemann.giantbombvideoplayer.Base.RxCallback;
+import com.kyleriedemann.giantbombvideoplayer.Base.RxSubscriber;
 import com.kyleriedemann.giantbombvideoplayer.Models.Key;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
+import com.kyleriedemann.giantbombvideoplayer.Network.ServiceGenerator;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.UI.DefaultFragment;
+import com.kyleriedemann.giantbombvideoplayer.UI.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
 import butterknife.ButterKnife;
-import retrofit.RestAdapter;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 
 /**
  * Created by kyle on 4/28/15.
  */
-public class AuthenticationFragment extends DefaultFragment {
+public class AuthenticationFragment extends BaseFragment implements RxCallback<Key> {
 
-    String authCodeText = "";
-    String apiKey = "";
-    String url = "";
+    public static final String API_KEY = "API_KEY";
+    public static final String FAILED_TO_RETRIEVE_API_KEY = "Failed to retrieve API key";
+    public static final String GETTING_YOUR_API_KEY = "Getting your API key...";
 
     @Override
     public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
@@ -44,7 +50,7 @@ public class AuthenticationFragment extends DefaultFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
         Button authRequestButton = (Button) getActivity().findViewById(R.id.button_authenticaion);
@@ -55,11 +61,9 @@ public class AuthenticationFragment extends DefaultFragment {
 
                 String authCodeText = authCodeEditText.getText().toString();
 
-                AsyncTest asyncTest = new AsyncTest();
-                asyncTest.execute(authCodeText);
+                authenticate(authCodeText);
 
-                Toast toast = Toast.makeText(getActivity(), "Getting your API key...", Toast.LENGTH_LONG);
-                toast.show();
+                Snackbar.make(view, GETTING_YOUR_API_KEY, Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -70,39 +74,35 @@ public class AuthenticationFragment extends DefaultFragment {
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 String apiKeyTest = sharedPref.getString("API_KEY", "No Saved API Key");
 
-                Toast toast = Toast.makeText(getActivity(), apiKeyTest, Toast.LENGTH_LONG);
-                toast.show();
+                Snackbar.make(view, apiKeyTest, Snackbar.LENGTH_LONG).show();
             }
         });
     }
 
-    public class AsyncTest extends AsyncTask<String, Void, Boolean> {
+    public void authenticate(String authCode){
+        GiantbombApiClient client = ServiceGenerator.createService(GiantbombApiClient.class);
 
-        private final String LOG_TAG = AsyncTest.class.getSimpleName();
+        mCompositeSubscription.add(client.getApiKey(authCode, "json")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<>(this)));
+    }
 
-        @Override
-        protected Boolean doInBackground(String... params) {
-            RestAdapter restAdapter = GiantbombApiClient.buildRestAdapter(true);
-            GiantbombApiClient.Key giantbombApiClient = restAdapter.create(GiantbombApiClient.Key.class);
+    @Override
+    public void onDataReady(Key data) {
+        String apiKey = data.getApiKey();
 
-            Key key = giantbombApiClient.getApiKey(params[0], "json");
-            apiKey = key.getApiKey();
+        PrefManager.with(getContext()).save(API_KEY, apiKey);
+    }
 
-            return true;
-        }
+    @Override
+    public void onDataError(Throwable e) {
+        View view = getView();
 
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-
-            if(aBoolean) {
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                //need to put in the api key from the model
-                editor.putString("API_KEY", apiKey);
-                editor.apply();
-            }
-        }
+        if (view != null)
+            Snackbar.make(view,  FAILED_TO_RETRIEVE_API_KEY, Snackbar.LENGTH_LONG).show();
+        else
+            Toast.makeText(getContext(), FAILED_TO_RETRIEVE_API_KEY, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -126,7 +126,7 @@ public class AuthenticationFragment extends DefaultFragment {
     }
 
     @Override
-    public boolean shouldDisplayHomeUp() {
-        return super.shouldDisplayHomeUp();
+    protected int getLayoutResource() {
+        return R.layout.fragment_authentication;
     }
 }

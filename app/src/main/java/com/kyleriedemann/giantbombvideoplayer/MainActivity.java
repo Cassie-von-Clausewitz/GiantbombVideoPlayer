@@ -7,14 +7,16 @@ import android.os.Bundle;
 import android.widget.BaseAdapter;
 
 import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationFragment;
-import com.kyleriedemann.giantbombvideoplayer.UI.DefaultFragment;
-import com.kyleriedemann.giantbombvideoplayer.Video.VideoListFragment;
+import com.kyleriedemann.giantbombvideoplayer.UI.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.UI.DrawerLayoutActivity;
 import com.kyleriedemann.giantbombvideoplayer.UI.NavigationDrawerAdapter;
 import com.kyleriedemann.giantbombvideoplayer.UI.NavigationDrawerItem;
-import com.kyleriedemann.giantbombvideoplayer.UI.DrawerLayoutActivity;
+import com.kyleriedemann.giantbombvideoplayer.Video.VideoListFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+//import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationFragment;
 
 public class MainActivity extends DrawerLayoutActivity {
     private static final String TAG_ACTIVE_FRAGMENT = "fragment_active";
@@ -22,7 +24,7 @@ public class MainActivity extends DrawerLayoutActivity {
     // constants that represent the fragments
     public static final int VIDEO = 0;
     public static final int AUTH = 1;
-    private DefaultFragment activeFragment = null;
+    private BaseFragment activeFragment = null;
 
     // more nav drawer stuff
     private NavigationDrawerAdapter mNavDrawerAdapter;
@@ -57,7 +59,7 @@ public class MainActivity extends DrawerLayoutActivity {
     @Override
     public void restoreFragment(Bundle savedInstanceState) {
         //restore instance of the fragment
-        activeFragment = (DefaultFragment) getFragmentManager().getFragment(savedInstanceState, "activeFragment");
+        activeFragment = (BaseFragment) getFragmentManager().getFragment(savedInstanceState, "activeFragment");
     }
 
     @Override

@@ -25,4 +25,9 @@ public class Key {
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
+    @Override
+    public String toString() {
+        return apiKey;
+    }
 }
