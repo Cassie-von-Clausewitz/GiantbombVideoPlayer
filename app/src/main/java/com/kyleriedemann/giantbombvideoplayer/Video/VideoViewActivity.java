@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.kyleriedemann.giantbombvideoplayer.R;
@@ -19,7 +18,7 @@ public class VideoViewActivity extends AppCompatActivity {
 
     @Bind(R.id.video_view)
     VideoView videoView;
-    MediaController mediaController;
+    CustomMediaController mediaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,26 +26,20 @@ public class VideoViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_player);
         ButterKnife.bind(this);
 
-//        getDecorView().setOnSystemUiVisibilityChangeListener(this);
-        mediaController = new MediaController(this);
+        mediaController = new CustomMediaController(this);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
-
-
 
         videoView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN );
 
-
         String url = getIntent().getExtras().getString("url");
         Uri uri = Uri.parse(url);
         videoView.setVideoURI(uri);
 
-
         videoView.start();
-
     }
 
     @Override
