@@ -2,7 +2,11 @@ package com.kyleriedemann.giantbombvideoplayer.Network;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
+import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 
+import java.io.File;
+
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.GsonConverterFactory;
@@ -14,6 +18,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class ServiceGenerator {
     public static final String BASE_URL = "http://www.giantbomb.com/api/";
+    private static final int DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -33,6 +38,10 @@ public class ServiceGenerator {
 
         httpClient.addInterceptor(interceptor);
         httpClient.addInterceptor(new StethoInterceptor());
+
+        File cacheDir = new File(GiantbombApp.instance().getCacheDir(), "http");
+        Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
+        httpClient.cache(cache);
 
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();

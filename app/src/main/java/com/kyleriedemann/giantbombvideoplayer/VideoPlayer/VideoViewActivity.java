@@ -1,7 +1,6 @@
 package com.kyleriedemann.giantbombvideoplayer.VideoPlayer;
 
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
 
+import com.danikula.videocache.HttpProxyCacheServer;
+import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 import com.kyleriedemann.giantbombvideoplayer.R;
 import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
@@ -52,8 +53,9 @@ public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.
 
         currentUrl = url;
 
-        Uri uri = Uri.parse(url);
-        videoView.setVideoURI(uri);
+        HttpProxyCacheServer proxy = GiantbombApp.instance().getProxy();
+        String proxyUrl = proxy.getProxyUrl(url);
+        videoView.setVideoPath(proxyUrl);
     }
 
     @Override
@@ -126,8 +128,8 @@ public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.
     @Override
     public void onPrepared(MediaPlayer mp) {
         int position = PrefManager.with(this).getInt(currentUrl, 0);
-        videoView.seekTo(position);
 
+        videoView.seekTo(position);
         videoView.start();
     }
 
