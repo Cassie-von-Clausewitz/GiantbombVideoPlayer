@@ -18,7 +18,7 @@ public interface GiantbombApiClient {
             @Query("format") String format
     );
 
-    @GET("validate/")
+    @GET("validate")
     Observable<Key> getApiKey(
             @Query("link_code") String linkCode,
             @Query("format") String format

@@ -1,8 +1,6 @@
 package com.kyleriedemann.giantbombvideoplayer.Authentication;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
@@ -16,13 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
 import com.kyleriedemann.giantbombvideoplayer.Base.RxCallback;
 import com.kyleriedemann.giantbombvideoplayer.Base.RxSubscriber;
+import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 import com.kyleriedemann.giantbombvideoplayer.Models.Key;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
 import com.kyleriedemann.giantbombvideoplayer.Network.ServiceGenerator;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
 import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
 import butterknife.ButterKnife;
@@ -59,7 +58,7 @@ public class AuthenticationFragment extends BaseFragment implements RxCallback<K
             public void onClick(View v) {
                 EditText authCodeEditText = (EditText) getActivity().findViewById(R.id.edit_text_auth_code);
 
-                String authCodeText = authCodeEditText.getText().toString();
+                String authCodeText = authCodeEditText.getText().toString().trim();
 
                 authenticate(authCodeText);
 
@@ -71,8 +70,7 @@ public class AuthenticationFragment extends BaseFragment implements RxCallback<K
         testPrefButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                String apiKeyTest = sharedPref.getString("API_KEY", "No Saved API Key");
+                String apiKeyTest = PrefManager.with(GiantbombApp.instance()).getString(API_KEY, "No Saved API Key");
 
                 Snackbar.make(view, apiKeyTest, Snackbar.LENGTH_LONG).show();
             }
@@ -92,7 +90,7 @@ public class AuthenticationFragment extends BaseFragment implements RxCallback<K
     public void onDataReady(Key data) {
         String apiKey = data.getApiKey();
 
-        PrefManager.with(getContext()).save(API_KEY, apiKey);
+        PrefManager.with(GiantbombApp.instance()).save(API_KEY, apiKey);
     }
 
     @Override

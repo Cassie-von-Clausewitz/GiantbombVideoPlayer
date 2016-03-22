@@ -1,21 +1,21 @@
 package com.kyleriedemann.giantbombvideoplayer.VideoList;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
 import com.kyleriedemann.giantbombvideoplayer.Base.RxCallback;
 import com.kyleriedemann.giantbombvideoplayer.Base.RxSubscriber;
+import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 import com.kyleriedemann.giantbombvideoplayer.Models.Result;
 import com.kyleriedemann.giantbombvideoplayer.Models.Video;
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient;
 import com.kyleriedemann.giantbombvideoplayer.Network.ServiceGenerator;
 import com.kyleriedemann.giantbombvideoplayer.R;
-import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +56,7 @@ public class VideoListFragment extends BaseFragment implements RxCallback<Result
 
         GiantbombApiClient client = ServiceGenerator.createService(GiantbombApiClient.class);
 
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String apiKey = sharedPref.getString("API_KEY", "No Saved API Key");
+        String apiKey = PrefManager.with(GiantbombApp.instance()).getString("API_KEY", "No Saved API Key");
 
         mCompositeSubscription.add(client.getVideos(apiKey, "json")
                 .subscribeOn(Schedulers.io())
