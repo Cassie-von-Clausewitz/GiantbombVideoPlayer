@@ -2,13 +2,6 @@ package com.kyleriedemann.giantbombvideoplayer.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
-
-/**
- * Created by kyle on 4/28/15.
- */
-
-@Parcel
 public class Key {
 
     @SerializedName("api_key")

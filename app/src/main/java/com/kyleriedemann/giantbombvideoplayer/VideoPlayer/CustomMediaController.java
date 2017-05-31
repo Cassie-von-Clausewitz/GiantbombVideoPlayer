@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.MediaController;
 
-/**
- * Created by kyle on 3/17/16.
- */
 public class CustomMediaController extends MediaController {
     public CustomMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);

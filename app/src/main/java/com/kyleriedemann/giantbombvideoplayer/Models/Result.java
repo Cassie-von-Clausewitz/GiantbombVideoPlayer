@@ -2,14 +2,8 @@ package com.kyleriedemann.giantbombvideoplayer.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
-
 import java.util.List;
 
-/**
- * Created by kyle on 4/21/15.
- */
-@Parcel
 public class Result {
 
     @SerializedName("results")

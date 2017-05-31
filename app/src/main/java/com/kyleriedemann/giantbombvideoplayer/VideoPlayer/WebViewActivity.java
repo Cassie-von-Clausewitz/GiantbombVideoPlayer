@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import com.kyleriedemann.giantbombvideoplayer.R;
 
-/**
- * Created by kyle on 4/27/15.
- */
 public class WebViewActivity extends Activity {
     private WebView webview;
     private String url;

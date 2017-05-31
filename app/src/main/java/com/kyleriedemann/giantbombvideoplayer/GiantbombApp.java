@@ -1,29 +1,26 @@
 package com.kyleriedemann.giantbombvideoplayer;
 
 import android.app.Application;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.facebook.stetho.Stetho;
+import com.inkapplications.android.applicationlifecycle.ApplicationCallbacks;
+import com.kyleriedemann.giantbombvideoplayer.Base.AndroidApplicationModule;
+import com.kyleriedemann.giantbombvideoplayer.Base.ApplicationComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.Debug;
+import com.squareup.leakcanary.LeakCanary;
 
-import timber.log.Timber;
+import javax.inject.Inject;
 
-/**
- * Created by kyle on 3/15/16.
- */
+import inkapplicaitons.android.logger.Logger;
+import io.reactivex.disposables.CompositeDisposable;
+
 public class GiantbombApp extends Application {
 
     private static GiantbombApp giantbombApp;
     private HttpProxyCacheServer proxy;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        Stetho.initializeWithDefaults(this);
-        Timber.plant(new Timber.DebugTree());
-
-        giantbombApp = this;
-    }
 
     public HttpProxyCacheServer getProxy() {
         if (proxy == null) proxy = newProxy();
@@ -39,5 +36,67 @@ public class GiantbombApp extends Application {
 
     public static GiantbombApp instance(){
         return giantbombApp;
+    }
+
+    private ApplicationComponent applicationComponent;
+
+    private CompositeDisposable compositeDisposable;
+
+    @Inject
+    ApplicationCallbacks applicationCallbacks;
+
+    @Inject
+    Logger logger;
+
+    @Inject
+    @Debug
+    ApplicationCallbacks debugCallbacks;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Stetho.initializeWithDefaults(this);
+
+        giantbombApp = this;
+
+        // enabling vector drawable compatibility
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
+        LeakCanary.isInAnalyzerProcess(this);
+        this.initializeInjections();
+        this.applicationCallbacks.onCreate(this);
+        this.debugCallbacks.onCreate(this);
+
+        compositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+
+        if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
+            compositeDisposable.dispose();
+        }
+    }
+
+    /**
+     * Initialize the shagred application component and use it to inject this class.
+     */
+    private void initializeInjections() {
+        DaggerApplicationComponent.Builder builder = DaggerApplicationComponent.builder();
+        builder.androidApplicationModule(new AndroidApplicationModule(this));
+
+        this.applicationComponent = builder.build();
+        this.applicationComponent.inject(this);
+    }
+
+    /**
+     * Get the single-instance of the shared application component.
+     *
+     * @return An application component to be used to inject base-level classes.
+     */
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
     }
 }

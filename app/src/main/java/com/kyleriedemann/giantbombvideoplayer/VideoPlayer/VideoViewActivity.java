@@ -14,16 +14,16 @@ import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 import com.kyleriedemann.giantbombvideoplayer.R;
 import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnInfoListener {
 
-    @Bind(R.id.video_view)
+    @BindView(R.id.video_view)
     VideoView videoView;
 
-    @Bind(R.id.video_buffering_spinner)
+    @BindView(R.id.video_buffering_spinner)
     ProgressBar bufferingSpinner;
 
     CustomMediaController mediaController;

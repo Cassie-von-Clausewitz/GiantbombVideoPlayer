@@ -2,6 +2,9 @@ package com.kyleriedemann.giantbombvideoplayer.VideoList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,36 +16,36 @@ import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity;
 import com.kyleriedemann.giantbombvideoplayer.R;
 import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.VideoViewActivity;
 import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.WebViewActivity;
-import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import it.gmariotti.cardslib.library.internal.Card;
 
-/**
- * Created by kyle on 4/21/15.
- */
-public class VideoCard extends Card implements Card.OnCardClickListener, Card.OnLongCardClickListener {
+public class VideoCard extends CardView {
 
     Video v;
-    @Bind(R.id.video_thumb)
+    @BindView(R.id.video_thumb)
     ImageView videoThumb;
-    @Bind(R.id.video_name)
+    @BindView(R.id.video_name)
     TextView videoName;
-    @Bind(R.id.deck)
+    @BindView(R.id.deck)
     TextView deck;
 
-    public VideoCard(Context context, Video v) {
-        super(context, R.layout.video_card);
-        this.v = v;
-
-        setOnClickListener(this);
-        setOnLongClickListener(this);
+    public VideoCard(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        inflateLayout(context, attrs);
     }
 
-    @Override
+    public VideoCard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        inflateLayout(context, attrs);
+    }
+
+    public void inflateLayout(Context context, AttributeSet attrs) {
+        inflate(context, R.layout.video_card, this);
+        ButterKnife.bind(this);
+    }
+
     public void setupInnerViewElements(ViewGroup parent, View view) {
-        super.setupInnerViewElements(parent, view);
 
         videoThumb = ButterKnife.findById(view, R.id.video_thumb);
         videoName = ButterKnife.findById(view, R.id.video_name);
@@ -59,16 +62,15 @@ public class VideoCard extends Card implements Card.OnCardClickListener, Card.On
 
             String url = v.getVideoImage().getThumbImageUrl().replaceAll(" ", "%20").replaceAll(".png", ".jpg");
             Log.d("THUMB URL", url);
-            Picasso.with(getContext())
-                    .load(url)
-                    .error(R.drawable.ic_launcher)
-                    .into(videoThumb);
+//            Picasso.with(getContext())
+//                    .load(url)
+//                    .error(R.drawable.ic_launcher)
+//                    .into(videoThumb);
 
         }
     }
 
-    @Override
-    public void onClick(Card card, View view) {
+    public void onClick(View view) {
         Intent i = new Intent(getContext(), VideoViewActivity.class);
 //        Intent i = new Intent(getContext(), WebViewActivity.class);
         if(Connectivity.isConnectedFast(getContext())) {
@@ -80,8 +82,7 @@ public class VideoCard extends Card implements Card.OnCardClickListener, Card.On
         getContext().startActivity(i);
     }
 
-    @Override
-    public boolean onLongClick(Card card, View view) {
+    public boolean onLongClick(View view) {
 //        Intent i = new Intent(getContext(), VideoViewActivity.class);
         Intent i = new Intent(getContext(), WebViewActivity.class);
         if(Connectivity.isConnectedFast(getContext())) {

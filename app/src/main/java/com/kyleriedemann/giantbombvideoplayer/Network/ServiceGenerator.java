@@ -9,13 +9,10 @@ import java.io.File;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by kyle on 2/3/16.
- */
 public class ServiceGenerator {
     public static final String BASE_URL = "http://www.giantbomb.com/api/";
     private static final int DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
@@ -26,7 +23,7 @@ public class ServiceGenerator {
             new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
     public static <T> T createService(Class<T> serviceClass) {
         return createService(serviceClass, null);
