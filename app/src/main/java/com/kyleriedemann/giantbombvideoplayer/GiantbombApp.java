@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatDelegate;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.facebook.stetho.Stetho;
 import com.inkapplications.android.applicationlifecycle.ApplicationCallbacks;
-import com.kyleriedemann.giantbombvideoplayer.Base.AndroidApplicationModule;
-import com.kyleriedemann.giantbombvideoplayer.Base.ApplicationComponent;
-import com.kyleriedemann.giantbombvideoplayer.Base.DaggerApplicationComponent;
-import com.kyleriedemann.giantbombvideoplayer.Base.Debug;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.DaggerApplicationComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules.AndroidApplicationModule;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ApplicationComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Debug;
 import com.squareup.leakcanary.LeakCanary;
 
 import javax.inject.Inject;

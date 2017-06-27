@@ -1,11 +1,11 @@
-package com.kyleriedemann.giantbombvideoplayer.Base.actionbar;
+package com.kyleriedemann.giantbombvideoplayer.Base.ActionBar;
 
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 
-import com.kyleriedemann.giantbombvideoplayer.Base.ActivityScope;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.ActivityScope;
 
 import javax.inject.Inject;
 

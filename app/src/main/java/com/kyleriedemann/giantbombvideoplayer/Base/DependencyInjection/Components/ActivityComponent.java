@@ -1,4 +1,9 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components;
+
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseActivity;
+import com.kyleriedemann.giantbombvideoplayer.Base.BaseFragment;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.ActivityScope;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules.AndroidActivityModule;
 
 import dagger.Subcomponent;
 

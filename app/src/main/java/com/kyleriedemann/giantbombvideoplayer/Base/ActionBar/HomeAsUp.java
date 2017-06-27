@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base.actionbar;
+package com.kyleriedemann.giantbombvideoplayer.Base.ActionBar;
 
 import android.support.v4.app.FragmentActivity;
 

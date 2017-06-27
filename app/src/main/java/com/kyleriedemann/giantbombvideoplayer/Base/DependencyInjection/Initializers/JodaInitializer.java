@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Initializers;
 
 import android.app.Application;
 

@@ -13,7 +13,7 @@
 
     <string name="title_activity_video_detail">VideoDetailActivity</string>
     <string name="title_activity_video_web_view">WebViewActivity</string>
-
+    <string name="title_activity_authentication">Authenticate</string>
 
     <string-array name="navigation_drawer_items">
         <item>Videos</item>

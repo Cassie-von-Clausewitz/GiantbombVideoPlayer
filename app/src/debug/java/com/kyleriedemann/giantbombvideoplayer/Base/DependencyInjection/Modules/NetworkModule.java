@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 

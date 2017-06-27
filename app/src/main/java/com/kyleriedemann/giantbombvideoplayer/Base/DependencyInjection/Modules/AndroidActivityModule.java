@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.WindowManager;
+
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.ActivityScope;
 
 import dagger.Module;
 import dagger.Provides;

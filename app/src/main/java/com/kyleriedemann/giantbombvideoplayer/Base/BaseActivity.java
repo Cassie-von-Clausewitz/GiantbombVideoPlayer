@@ -6,7 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.kyleriedemann.giantbombvideoplayer.Base.actionbar.ActionBarController;
+import com.kyleriedemann.giantbombvideoplayer.Base.ActionBar.ActionBarController;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ActivityComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules.AndroidActivityModule;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ApplicationComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.DaggerAwareActivity;
 import com.kyleriedemann.giantbombvideoplayer.GiantbombApp;
 import com.kyleriedemann.giantbombvideoplayer.R;
 

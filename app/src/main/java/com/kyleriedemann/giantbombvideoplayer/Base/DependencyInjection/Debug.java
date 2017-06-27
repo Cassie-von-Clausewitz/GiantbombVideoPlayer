@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection;
 
 import java.lang.annotation.Retention;
 

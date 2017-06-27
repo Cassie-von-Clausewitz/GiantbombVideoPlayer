@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'de.mobilej.unmock'
 apply plugin: 'groovyx.android'
-apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
 apply plugin: "build-time-tracker"
 
 android {
@@ -80,10 +81,6 @@ buildtimetracker {
             csv "times.csv"
         }
     }
-}
-
-kapt {
-    generateStubs = true
 }
 
 tasks.whenTaskAdded { task -> if (task.name == "compileDebugGroovyWithGroovyc") { task.enabled = false } }

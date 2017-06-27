@@ -1,7 +1,9 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Modules;
 
 import com.inkapplications.android.applicationlifecycle.ApplicationCallbacks;
 import com.inkapplications.android.applicationlifecycle.ApplicationLifecycleSubscriber;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Debug;
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Initializers.StethoInitializer;
 
 import dagger.Module;
 import dagger.Provides;

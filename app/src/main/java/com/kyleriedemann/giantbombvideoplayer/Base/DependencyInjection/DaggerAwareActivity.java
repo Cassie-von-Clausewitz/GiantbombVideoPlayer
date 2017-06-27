@@ -1,6 +1,8 @@
-package com.kyleriedemann.giantbombvideoplayer.Base;
+package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection;
 
 import android.support.annotation.NonNull;
+
+import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ActivityComponent;
 
 /**
  * Boilerplate functionality that is required by Dagger2's architecture.

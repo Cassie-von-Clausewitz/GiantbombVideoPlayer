@@ -1,26 +1,40 @@
-<android.support.v4.widget.DrawerLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".MainActivity"
+    >
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"/>
 
-    <ListView
-        android:id="@+id/navigation_list"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:clipToPadding="false"
-        android:layout_gravity="start|bottom"
-        android:choiceMode="singleChoice"
-        android:divider="@color/grey_white_1000"
-        android:dividerHeight="1dp"
-        android:background="@color/grey_white_1000"
-        android:listSelector="@drawable/drawer_selector"
+    <Button
+        android:id="@+id/auth_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="96dp"
+        android:text="Auth"
         />
 
-</android.support.v4.widget.DrawerLayout>
+    <Button
+        android:id="@+id/video_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_gravity="center"
+        android:text="Videos"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
