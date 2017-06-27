@@ -8,6 +8,7 @@ import com.facebook.stetho.Stetho;
 import com.inkapplications.android.applicationlifecycle.ApplicationCallbacks;
 import com.kyleriedemann.giantbombvideoplayer.Base.AndroidApplicationModule;
 import com.kyleriedemann.giantbombvideoplayer.Base.ApplicationComponent;
+import com.kyleriedemann.giantbombvideoplayer.Base.DaggerApplicationComponent;
 import com.kyleriedemann.giantbombvideoplayer.Base.Debug;
 import com.squareup.leakcanary.LeakCanary;
 

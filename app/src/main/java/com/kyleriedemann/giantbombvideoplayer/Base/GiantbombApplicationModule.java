@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import inkapplicaitons.android.logger.CompositeLogger;
+import inkapplicaitons.android.logger.EmptyLogger;
 import inkapplicaitons.android.logger.Logger;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -35,17 +36,5 @@ public class GiantbombApplicationModule {
         List<Logger> loggers = Collections.singletonList(debugLogger);
 
         return new CompositeLogger(loggers);
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient httpClient() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        return new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .addNetworkInterceptor(httpLoggingInterceptor)
-                .build();
     }
 }

@@ -8,17 +8,17 @@ apply plugin: "build-time-tracker"
 android {
     def specifiedVersionCode = project.hasProperty("versionCode") ? project.getProperty("versionCode") as Integer : 1
     def specifiedVersionName = project.hasProperty("versionName") ? project.getProperty("versionName") as String : "2.0-SNAPSHOT"
-    def debugSupport = project.hasProperty("debugSupport")
 
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
 
     defaultConfig {
         applicationId "com.one20.ota"
+        minSdkVersion 21
         targetSdkVersion 25
+        multiDexEnabled true
         versionCode specifiedVersionCode
         versionName specifiedVersionName
-        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
@@ -31,11 +31,6 @@ android {
     }
     buildTypes {
         debug {
-            defaultConfig {
-                minSdkVersion debugSupport ? 16 : 21
-            }
-            multiDexEnabled !debugSupport
-            minifyEnabled debugSupport
             applicationIdSuffix '.debug'
             debuggable true
             testCoverageEnabled true
@@ -43,9 +38,6 @@ android {
         release {
             if (project.hasProperty("keystoreFile")) {
                 signingConfig signingConfigs.release
-            }
-            defaultConfig {
-                minSdkVersion 16
             }
             minifyEnabled true
         }

@@ -10,7 +10,9 @@ import dagger.Component;
 @Component(
         modules = {
                 AndroidApplicationModule.class,
-                GiantbombApplicationModule.class
+                GiantbombApplicationModule.class,
+                DebugModule.class,
+                NetworkModule.class
         }
 )
 public interface ApplicationComponent {

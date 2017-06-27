@@ -35,7 +35,7 @@ public abstract class DrawerLayoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
 
-        android.support.v7.widget.Toolbar toolbar = (Toolbar)findViewById(R.id.compat_toolbar);
+        android.support.v7.widget.Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //make action bar icon a toggle and back button
