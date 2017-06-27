@@ -32,7 +32,7 @@ import io.reactivex.disposables.CompositeDisposable;
 abstract public class BaseActivity extends AppCompatActivity implements DaggerAwareActivity {
 
     @Inject
-    Logger logger;
+    public Logger logger;
 
     @Inject
     ActionBarController actionBarController;

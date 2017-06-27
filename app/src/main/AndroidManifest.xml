@@ -47,6 +47,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kyleriedemann.giantbombvideoplayer.MainActivity"/>
         </activity>
+        <activity android:name=".VideoList.VideoListActivity"
+                  android:label="@string/title_video_list" />
     </application>
 
 </manifest>
