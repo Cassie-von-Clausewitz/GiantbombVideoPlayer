@@ -156,9 +156,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.danikula:videocache:2.3.4'
 
-    compile 'com.airbnb.android:epoxy:2.1.0'
-    annotationProcessor 'com.airbnb.android:epoxy-processor:2.1.0'
-    kapt 'com.airbnb.android:epoxy-processor:2.1.0'
+    compile 'com.airbnb.android:epoxy:2.2.0'
+    annotationProcessor 'com.airbnb.android:epoxy-processor:2.2.0'
+    kapt 'com.airbnb.android:epoxy-processor:2.2.0'
 
     compile 'nl.littlerobots.rxlint:rxlint:1.2'
 

@@ -4,6 +4,7 @@ import android.support.design.widget.Snackbar
 import android.widget.EditText
 import butterknife.OnClick
 import com.kyleriedemann.giantbombvideoplayer.Base.ActionBar.DisplayTitle
+import com.kyleriedemann.giantbombvideoplayer.Base.ActionBar.HomeAsUp
 import com.kyleriedemann.giantbombvideoplayer.Base.BaseActivity
 import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ActivityComponent
 import com.kyleriedemann.giantbombvideoplayer.GiantbombApp
@@ -17,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
+@HomeAsUp
 @DisplayTitle(R.string.app_name)
 @Layout(R.layout.activity_authentication)
 class AuthenticationActivity : BaseActivity() {

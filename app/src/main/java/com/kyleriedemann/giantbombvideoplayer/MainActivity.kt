@@ -6,8 +6,7 @@ import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationActiv
 import com.kyleriedemann.giantbombvideoplayer.Base.ActionBar.DisplayTitle
 import com.kyleriedemann.giantbombvideoplayer.Base.BaseActivity
 import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ActivityComponent
-import com.kyleriedemann.giantbombvideoplayer.Base.Extensions.startNew
-import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.VideoViewActivity
+import com.kyleriedemann.giantbombvideoplayer.Base.Extensions.startActivity
 import inkapplicaitons.android.logger.Logger
 import inkapplications.android.layoutinjector.Layout
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class MainActivity : BaseActivity() {
     lateinit var logger: Logger
 
     @OnClick(R.id.auth_button)
-    fun startAuth() = startNew(AuthenticationActivity::class)
+    fun startAuth() = startActivity(AuthenticationActivity::class)
 
     override fun injectSelf(component: ActivityComponent) = component.inject(this)
 }
