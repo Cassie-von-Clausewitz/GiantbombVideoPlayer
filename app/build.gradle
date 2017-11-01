@@ -1,32 +1,25 @@
 apply plugin: 'com.android.application'
 apply plugin: 'de.mobilej.unmock'
-apply plugin: 'groovyx.android'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android'
 apply plugin: "build-time-tracker"
 
 android {
-    def specifiedVersionCode = project.hasProperty("versionCode") ? project.getProperty("versionCode") as Integer : 1
-    def specifiedVersionName = project.hasProperty("versionName") ? project.getProperty("versionName") as String : "2.0-SNAPSHOT"
-
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
-        applicationId "com.one20.ota"
+        applicationId "com.kyleriedemann.labombagigante"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         multiDexEnabled true
-        versionCode specifiedVersionCode
-        versionName specifiedVersionName
+        versionCode 1
+        versionName "0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
     dexOptions {
         preDexLibraries true
     }
@@ -34,13 +27,20 @@ android {
         debug {
             applicationIdSuffix '.debug'
             debuggable true
-            testCoverageEnabled true
+        }
+        qa {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            applicationIdSuffix '.qa'
         }
         release {
-            if (project.hasProperty("keystoreFile")) {
-                signingConfig signingConfigs.release
-            }
+            signingConfig signingConfigs.debug
             minifyEnabled true
+        }
+    }
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
         }
     }
 
@@ -54,6 +54,7 @@ android {
     }
 
     lintOptions {
+        disable 'InvalidPackage'
         // lint won't respect the @TargetApi annotation ¯\_(ツ)_/¯
         disable 'NewApi'
     }
@@ -83,15 +84,13 @@ buildtimetracker {
     }
 }
 
-tasks.whenTaskAdded { task -> if (task.name == "compileDebugGroovyWithGroovyc") { task.enabled = false } }
-tasks.whenTaskAdded { task -> if (task.name == "compileQaGroovyWithGroovyc") { task.enabled = false } }
-tasks.whenTaskAdded { task -> if (task.name == "compileReleaseGroovyWithGroovyc") { task.enabled = false } }
-
 unMock {
     keep 'android.net.Uri'
     keep 'android.location.Location'
     keep 'android.text.TextUtils'
     keep 'android.util.Log'
+    keep 'android.arch.lifecycle.ViewModel'
+    keep 'android.content.Intent'
 }
 
 dependencies {
@@ -100,17 +99,28 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:gridlayout-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'com.android.support:gridlayout-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-core-utils:26.1.0'
+    compile 'com.android.support:customtabs:26.1.0'
+
+    compile "android.arch.lifecycle:runtime:1.0.3"
+    compile "android.arch.lifecycle:extensions:1.0.0-rc1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-rc1"
+    kapt "android.arch.lifecycle:compiler:1.0.0-rc1"
+
+    compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
+        // this includes a colliding version of this guy's FastAdapter library if this
+        // and MaterialDrawer are both marked as transitive
+        transitive = false
+    }
 
     compile('com.mikepenz:materialdrawer:5.8.2@aar') {
         transitive = true
     }
-
-    annotationProcessor 'com.squareup:javapoet:1.7.0'
 
     compile "com.google.dagger:dagger:2.11"
     annotationProcessor "com.google.dagger:dagger-compiler:2.11"
@@ -121,62 +131,74 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     kapt 'com.jakewharton:butterknife-compiler:8.5.1'
 
-    compile 'frankiesardo:icepick:3.1.0'
-    provided 'frankiesardo:icepick-processor:3.1.0'
-
     compile 'com.facebook.fresco:fresco:1.1.0'
     compile "com.facebook.fresco:imagepipeline-okhttp3:1.1.0"
 
-    debugCompile 'com.facebook.stetho:stetho:1.4.2'
-    debugCompile 'com.uphyca:stetho_realm:2.0.0'
+    debugCompile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    qaCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile 'com.github.InkApplications:android-layout-injector:1.1.0'
     compile 'com.github.InkApplications:android-application-lifecycle:1.0.1'
     compile 'com.github.InkApplications:android-logger:4.1.0'
     compile 'com.github.InkApplications:guava-stopwatch:21.0'
     compile 'com.github.kylealanr:GestureDetectors:1.1'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.github.u1f4f1:PowerBottomSheet:1.6'
+    compile 'com.mobsandgeeks:android-saripaar:2.0.3'
     compile 'com.fernandocejas:arrow:1.0.0'
 
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.0.3'
 
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.danikula:videocache:2.3.4'
+    compile 'com.google.code.gson:gson:2.8.0'
 
-    compile 'com.airbnb.android:epoxy:2.2.0'
-    annotationProcessor 'com.airbnb.android:epoxy-processor:2.2.0'
-    kapt 'com.airbnb.android:epoxy-processor:2.2.0'
+    compile('com.facebook.android:facebook-android-sdk:4.20.0') {
+        exclude group: 'com.android.support', module: 'customtabs'
+    }
+
+    compile 'com.airbnb.android:epoxy:2.3.0'
+    annotationProcessor 'com.airbnb.android:epoxy-processor:2.3.0'
+    kapt 'com.airbnb.android:epoxy-processor:2.3.0'
+    compile 'com.github.rubensousa:gravitysnaphelper:1.2'
 
     compile 'nl.littlerobots.rxlint:rxlint:1.2'
 
     compile 'net.danlew:android.joda:2.9.9'
 
-    compile 'br.com.simplepass:loading-button-android:1.7.0'
+    compile 'br.com.simplepass:loading-button-android:1.8.0'
 
-    compile 'me.grantland:autofittextview:0.2.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.7.21'
-    unmock 'org.robolectric:android-all:4.3_r2-robolectric-0'
+    compile 'com.github.moove-it:fakeit:v0.7'
 
     // Test Dependencies
-    testCompile 'org.robospock:robospock:1.0.1'
-    testCompile 'cglib:cglib:3.2.4'
-    testCompile 'org.objenesis:objenesis:2.4'
+    testCompile 'org.amshove.kluent:kluent:1.26'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.10.0'
+    testCompile("com.nhaarman:mockito-kotlin:1.4.0") {
+        exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib"
+    }
+    unmock 'org.robolectric:android-all:4.3_r2-robolectric-0'
+
     testCompile 'joda-time:joda-time:2.9.9'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlin:kotlin-stdlib:1.1.51'
+    }
 }
 
 tasks.withType(Test) {
@@ -184,5 +206,3 @@ tasks.withType(Test) {
         exceptionFormat "full"
     }
 }
-
-apply plugin: 'me.tatarka.retrolambda'
