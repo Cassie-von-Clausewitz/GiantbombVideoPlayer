@@ -50,7 +50,7 @@ class GiantbombAppModule : AndroidModule() {
                         .client(get())
                         .build()
             }
-            provide { get<Retrofit>().create(GiantbombApiClient::class.java) }
+            provide { get<Retrofit>().create(GiantbombApiClient::class.java) } bind GiantbombApiClient::class
 
         }
 

@@ -1,59 +1,48 @@
 package com.kyleriedemann.giantbombvideoplayer.VideoPlayer
 
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.VideoView
-
 import com.danikula.videocache.HttpProxyCacheServer
-import com.kyleriedemann.giantbombvideoplayer.GiantbombApp
 import com.kyleriedemann.giantbombvideoplayer.R
-import com.kyleriedemann.giantbombvideoplayer.Utils.PrefManager
-
-import butterknife.BindView
-import butterknife.ButterKnife
-
+import kotlinx.android.synthetic.main.activity_video_player.*
+import org.koin.android.ext.android.inject
 
 class VideoViewActivity : AppCompatActivity(), MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnInfoListener {
 
-    @BindView(R.id.video_view)
-    internal var videoView: VideoView? = null
+    val proxy: HttpProxyCacheServer by inject()
+    val prefs: SharedPreferences by inject()
 
-    @BindView(R.id.video_buffering_spinner)
-    internal var bufferingSpinner: ProgressBar? = null
-
-    internal var mediaController: CustomMediaController
+    internal lateinit var mediaController: CustomMediaController
 
     internal var currentUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
-        ButterKnife.bind(this)
 
         mediaController = CustomMediaController(this)
-        mediaController.setAnchorView(videoView)
-        videoView!!.setMediaController(mediaController)
+        mediaController.setAnchorView(video_view)
+        video_view!!.setMediaController(mediaController)
 
-        videoView!!.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        video_view!!.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 
-        videoView!!.setOnCompletionListener(this)
-        videoView!!.setOnPreparedListener(this)
-        videoView!!.setOnInfoListener(this)
+        video_view!!.setOnCompletionListener(this)
+        video_view!!.setOnPreparedListener(this)
+        video_view!!.setOnInfoListener(this)
 
         val url = intent.extras!!.getString("url")
 
         currentUrl = url
 
-        val proxy = GiantbombApp.Companion.instance().getProxy()
         val proxyUrl = proxy.getProxyUrl(url)
-        videoView!!.setVideoPath(proxyUrl)
+        video_view!!.setVideoPath(proxyUrl)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -75,14 +64,14 @@ class VideoViewActivity : AppCompatActivity(), MediaPlayer.OnCompletionListener,
     override fun onRestart() {
         super.onRestart()
 
-        val position = PrefManager.with(this).getInt(currentUrl, 0)
-        if (videoView != null) videoView!!.seekTo(position)
+        val position = prefs.getInt(currentUrl, 0)
+        if (video_view != null) video_view!!.seekTo(position)
     }
 
     override fun onPause() {
         super.onPause()
 
-        PrefManager.with(this).save(currentUrl, videoView!!.currentPosition)
+        prefs.edit().putInt(currentUrl, video_view!!.currentPosition).apply()
     }
 
     override fun onResume() {
@@ -110,25 +99,25 @@ class VideoViewActivity : AppCompatActivity(), MediaPlayer.OnCompletionListener,
     }
 
     override fun onCompletion(mp: MediaPlayer) {
-        PrefManager.with(this).remove(currentUrl)
+        prefs.edit().remove(currentUrl).apply()
     }
 
     override fun onPrepared(mp: MediaPlayer) {
-        val position = PrefManager.with(this).getInt(currentUrl, 0)
+        val position = prefs.getInt(currentUrl, 0)
 
-        videoView!!.seekTo(position)
-        videoView!!.start()
+        video_view!!.seekTo(position)
+        video_view!!.start()
     }
 
     override fun onInfo(mp: MediaPlayer, what: Int, extra: Int): Boolean {
         if (MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START == what) {
-            bufferingSpinner!!.visibility = View.GONE
+            video_buffering_spinner!!.visibility = View.GONE
         }
         if (MediaPlayer.MEDIA_INFO_BUFFERING_START == what) {
-            bufferingSpinner!!.visibility = View.VISIBLE
+            video_buffering_spinner!!.visibility = View.VISIBLE
         }
         if (MediaPlayer.MEDIA_INFO_BUFFERING_END == what) {
-            bufferingSpinner!!.visibility = View.VISIBLE
+            video_buffering_spinner!!.visibility = View.VISIBLE
         }
         return false
     }

@@ -10,15 +10,15 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 
 import com.kyleriedemann.giantbombvideoplayer.R
+import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : Activity() {
-    private var webview: WebView? = null
     private var url: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
 
-        webview = findViewById<View>(R.id.webview) as WebView
         webview!!.webViewClient = WebViewClient()
 
         webview!!.settings.javaScriptEnabled = true

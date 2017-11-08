@@ -7,8 +7,6 @@ import android.util.AttributeSet
 import android.view.View
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
-import com.kyleriedemann.giantbombvideoplayer.Base.Extensions.debug
-import com.kyleriedemann.giantbombvideoplayer.Base.Extensions.getActivity
 import com.kyleriedemann.giantbombvideoplayer.Models.Video
 import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity
 import com.kyleriedemann.giantbombvideoplayer.R
@@ -46,7 +44,6 @@ class VideoCard : CardView {
             deck.text = deckStr
 
             val url = it.videoImage.thumbImageUrl.replace(" ".toRegex(), "%20").replace(".png".toRegex(), ".jpg")
-            context.getActivity()?.debug("Thumbnail Url %s", url)
             video_thumb.setImageURI(url)
 
             this.setOnClickListener {

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.kyleriedemann.giantbombvideoplayer.Models.Key
 import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient
-import com.kyleriedemann.giantbombvideoplayer.Network.ServiceGenerator
 import com.kyleriedemann.giantbombvideoplayer.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,6 +20,7 @@ class AuthenticationActivity : AppCompatActivity() {
     private val disposables = CompositeDisposable()
 
     val sharedPrefs: SharedPreferences by inject()
+    val apiClient: GiantbombApiClient by inject()
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
@@ -42,9 +42,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     fun authenticate(authCode: String) {
-        val client = ServiceGenerator.createService(GiantbombApiClient::class.java)
-
-        disposables.add(client.getApiKey(authCode, "json")
+        disposables.add(apiClient.getApiKey(authCode, "json")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ onDataReady(it) }, { onDataError(it) }))

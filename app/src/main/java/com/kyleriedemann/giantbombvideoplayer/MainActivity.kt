@@ -1,25 +1,19 @@
 package com.kyleriedemann.giantbombvideoplayer
 
-import android.content.Intent
-import butterknife.OnClick
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationActivity
-import com.kyleriedemann.giantbombvideoplayer.Base.ActionBar.DisplayTitle
-import com.kyleriedemann.giantbombvideoplayer.Base.BaseActivity
-import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Components.ActivityComponent
 import com.kyleriedemann.giantbombvideoplayer.Base.Extensions.startActivity
-import inkapplicaitons.android.logger.Logger
-import inkapplications.android.layoutinjector.Layout
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_main.*
 
-@DisplayTitle(R.string.app_name)
-@Layout(R.layout.activity_main)
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var logger: Logger
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    @OnClick(R.id.auth_button)
-    fun startAuth() = startActivity(AuthenticationActivity::class)
-
-    override fun injectSelf(component: ActivityComponent) = component.inject(this)
+        auth_button.setOnClickListener {
+            startActivity(AuthenticationActivity::class)
+        }
+    }
 }
