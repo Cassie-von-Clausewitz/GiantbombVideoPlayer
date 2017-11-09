@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Network
+package com.kyleriedemann.giantbombvideoplayer.Video.Network
 
 import android.content.Context
 import android.net.ConnectivityManager

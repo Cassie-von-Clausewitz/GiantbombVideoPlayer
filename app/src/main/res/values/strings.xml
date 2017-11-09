@@ -25,4 +25,5 @@
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
     </array>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
 </resources>

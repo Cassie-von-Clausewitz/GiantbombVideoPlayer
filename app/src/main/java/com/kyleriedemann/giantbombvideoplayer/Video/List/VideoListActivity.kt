@@ -1,10 +1,10 @@
-package com.kyleriedemann.giantbombvideoplayer.VideoList
+package com.kyleriedemann.giantbombvideoplayer.Video.List
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.kyleriedemann.giantbombvideoplayer.Models.Result
-import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Result
+import com.kyleriedemann.giantbombvideoplayer.Video.Network.GiantbombApiClient
 import com.kyleriedemann.giantbombvideoplayer.R
 import inkapplicaitons.android.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,7 +22,7 @@ class VideoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.video_list_layout)
+        setContentView(R.layout.activity_video_list)
 
         val apiKey = prefs.getString("API_KEY", "No Saved API Key")
 

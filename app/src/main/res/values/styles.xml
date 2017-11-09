@@ -1,24 +1,12 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:actionBarStyle">@style/ActionBar</item>
-
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-
     </style>
 
-    <style name="ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/teal_400</item>
-        <item name="android:height">@dimen/action_bar_size</item>
-        <item name="android:titleTextStyle">@style/ActionBarStyleTitle</item>
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="ActionBarStyleTitle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/grey_white_1000</item>
-    </style>
-
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

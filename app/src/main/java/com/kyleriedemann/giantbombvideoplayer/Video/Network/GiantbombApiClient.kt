@@ -1,7 +1,7 @@
-package com.kyleriedemann.giantbombvideoplayer.Network
+package com.kyleriedemann.giantbombvideoplayer.Video.Network
 
-import com.kyleriedemann.giantbombvideoplayer.Models.Key
-import com.kyleriedemann.giantbombvideoplayer.Models.Result
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Key
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Result
 
 import io.reactivex.Observable
 import retrofit2.http.GET

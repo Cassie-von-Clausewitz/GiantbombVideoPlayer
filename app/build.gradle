@@ -60,6 +60,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
 }
@@ -106,10 +110,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-core-utils:26.1.0'
     compile 'com.android.support:customtabs:26.1.0'
+    compile 'com.android.support:customtabs:26.1.0'
 
     compile "android.arch.lifecycle:runtime:1.0.3"
-    compile "android.arch.lifecycle:extensions:1.0.0-rc1"
-    kapt "android.arch.lifecycle:compiler:1.0.0-rc1"
+    compile "android.arch.lifecycle:extensions:1.0.0"
+    kapt "android.arch.lifecycle:compiler:1.0.0"
 
     compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
         // this includes a colliding version of this guy's FastAdapter library if this
@@ -125,7 +130,9 @@ dependencies {
     compile "org.koin:koin-android:$koin_version"
     testCompile "org.koin:koin-test:$koin_version"
 
-    compile 'com.facebook.fresco:fresco:1.1.0'
+    compile 'com.github.apl-devs:appintro:v4.2.2'
+
+    compile 'com.facebook.fresco:fresco:1.5.0'
     compile "com.facebook.fresco:imagepipeline-okhttp3:1.1.0"
 
     debugCompile 'com.facebook.stetho:stetho:1.5.0'
@@ -155,8 +162,8 @@ dependencies {
 
     compile 'com.danikula:videocache:2.7.0'
 
-    compile 'com.airbnb.android:epoxy:2.3.0'
-    kapt 'com.airbnb.android:epoxy-processor:2.3.0'
+    compile 'com.airbnb.android:epoxy:2.7.2'
+    kapt 'com.airbnb.android:epoxy-processor:2.7.2'
     compile 'com.github.rubensousa:gravitysnaphelper:1.2'
 
     compile 'nl.littlerobots.rxlint:rxlint:1.2'

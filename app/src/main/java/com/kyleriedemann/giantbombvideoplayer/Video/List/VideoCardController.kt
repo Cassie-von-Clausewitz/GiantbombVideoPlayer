@@ -1,7 +1,7 @@
-package com.kyleriedemann.giantbombvideoplayer.VideoList
+package com.kyleriedemann.giantbombvideoplayer.Video.List
 
 import com.airbnb.epoxy.EpoxyController
-import com.kyleriedemann.giantbombvideoplayer.Models.Result
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Result
 
 class VideoCardController : EpoxyController() {
     private var results: Result? = null

@@ -1,13 +1,11 @@
-package com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection
+package com.kyleriedemann.giantbombvideoplayer.DependencyInjection
 
-import android.content.SharedPreferences
 import com.danikula.videocache.HttpProxyCacheServer
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
-import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Context.BASE_URL
-import com.kyleriedemann.giantbombvideoplayer.Base.DependencyInjection.Context.DISK_CACHE_SIZE
-import com.kyleriedemann.giantbombvideoplayer.GiantbombApp
-import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient
+import com.kyleriedemann.giantbombvideoplayer.DependencyInjection.Context.BASE_URL
+import com.kyleriedemann.giantbombvideoplayer.DependencyInjection.Context.DISK_CACHE_SIZE
+import com.kyleriedemann.giantbombvideoplayer.Video.Network.GiantbombApiClient
 import inkapplicaitons.android.logger.CompositeLogger
 import inkapplicaitons.android.logger.ConsoleLogger
 import okhttp3.Cache

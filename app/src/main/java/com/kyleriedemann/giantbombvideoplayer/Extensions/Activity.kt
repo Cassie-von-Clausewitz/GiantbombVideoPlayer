@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base.Extensions
+package com.kyleriedemann.giantbombvideoplayer.Extensions
 
 import android.app.Activity
 import android.content.Intent

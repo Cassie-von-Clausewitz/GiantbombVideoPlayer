@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/action_bar_size"
-    android:background="@color/teal_400"/>
+    android:background="@color/md_teal_400"/>

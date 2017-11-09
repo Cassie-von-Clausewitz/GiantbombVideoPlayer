@@ -1,13 +1,14 @@
 package com.kyleriedemann.giantbombvideoplayer.Authentication
 
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
-import com.kyleriedemann.giantbombvideoplayer.Models.Key
-import com.kyleriedemann.giantbombvideoplayer.Network.GiantbombApiClient
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Key
+import com.kyleriedemann.giantbombvideoplayer.Video.Network.GiantbombApiClient
 import com.kyleriedemann.giantbombvideoplayer.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -22,22 +23,34 @@ class AuthenticationActivity : AppCompatActivity() {
     val sharedPrefs: SharedPreferences by inject()
     val apiClient: GiantbombApiClient by inject()
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
+
+        text_view_auth_link.setOnClickListener {
+            // Use a CustomTabsIntent.Builder to configure CustomTabsIntent.
+            // Once ready, call CustomTabsIntent.Builder.build() to create a CustomTabsIntent
+            // and launch the desired Url with CustomTabsIntent.launchUrl()
+
+            val url = getString(R.string.auth_url)
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            builder.setToolbarColor(getColor(R.color.primary))
+            customTabsIntent.launchUrl(this, Uri.parse(url))
+        }
 
         button_authenticaion.setOnClickListener {
             val authCodeEditText = findViewById<EditText>(R.id.edit_text_auth_code)
             val authCodeText = authCodeEditText.text.toString().trim { it <= ' ' }
 
-            Snackbar.make(window.decorView, GETTING_YOUR_API_KEY, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(linearLayout, GETTING_YOUR_API_KEY, Snackbar.LENGTH_LONG).show()
             authenticate(authCodeText)
         }
 
         button_pref_test.setOnClickListener {
             val apiKeyTest = sharedPrefs.getString(API_KEY, "No Saved API Key")
 
-            Snackbar.make(window.decorView, apiKeyTest, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(linearLayout, apiKeyTest, Snackbar.LENGTH_LONG).show()
         }
     }
 

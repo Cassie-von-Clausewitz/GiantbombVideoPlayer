@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Base.Extensions
+package com.kyleriedemann.giantbombvideoplayer.Extensions
 
 import android.content.Context
 import android.content.ContextWrapper

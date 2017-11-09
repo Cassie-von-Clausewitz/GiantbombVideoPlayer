@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.VideoList
+package com.kyleriedemann.giantbombvideoplayer.Video.List
 
 import android.content.Context
 import android.content.Intent
@@ -7,26 +7,18 @@ import android.util.AttributeSet
 import android.view.View
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
-import com.kyleriedemann.giantbombvideoplayer.Models.Video
-import com.kyleriedemann.giantbombvideoplayer.Network.Connectivity
+import com.kyleriedemann.giantbombvideoplayer.Video.Models.Video
+import com.kyleriedemann.giantbombvideoplayer.Video.Network.Connectivity
 import com.kyleriedemann.giantbombvideoplayer.R
-import com.kyleriedemann.giantbombvideoplayer.VideoPlayer.VideoViewActivity
+import com.kyleriedemann.giantbombvideoplayer.Video.Player.VideoViewActivity
 import kotlinx.android.synthetic.main.video_card.view.*
 
-@ModelView(defaultLayout = R.layout.model_video_card)
-class VideoCard : CardView {
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+class VideoCard(context: Context, attrs: AttributeSet?) : CardView(context, attrs) {
 
     internal var video: Video? = null
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        inflateLayout(context, attrs)
-    }
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        inflateLayout(context, attrs)
-    }
-
-    fun inflateLayout(context: Context, attrs: AttributeSet?) {
+    init {
         View.inflate(context, R.layout.video_card, this)
     }
 
@@ -35,16 +27,16 @@ class VideoCard : CardView {
         this.video = video
 
         video?.let {
-            video_name.text = it.name
+            video_title.text = it.name
 
-            var deckStr = it.deck
-            if (deckStr.length > 100) {
-                deckStr = deckStr.substring(0, 96) + "..."
-            }
-            deck.text = deckStr
+//            var deckStr = it.deck
+//            if (deckStr.length > 100) {
+//                deckStr = deckStr.substring(0, 96) + "..."
+//            }
+//            deck.text = deckStr
 
             val url = it.videoImage.thumbImageUrl.replace(" ".toRegex(), "%20").replace(".png".toRegex(), ".jpg")
-            video_thumb.setImageURI(url)
+            video_thumbnail.setImageURI(url)
 
             this.setOnClickListener {
                 val i = Intent(context, VideoViewActivity::class.java)
@@ -57,5 +49,9 @@ class VideoCard : CardView {
                 context.startActivity(i)
             }
         }
+    }
+
+    init {
+        View.inflate(context, R.layout.video_card, this)
     }
 }

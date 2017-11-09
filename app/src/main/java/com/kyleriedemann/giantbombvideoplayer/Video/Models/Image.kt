@@ -1,4 +1,4 @@
-package com.kyleriedemann.giantbombvideoplayer.Models
+package com.kyleriedemann.giantbombvideoplayer.Video.Models
 
 import com.google.gson.annotations.SerializedName
 

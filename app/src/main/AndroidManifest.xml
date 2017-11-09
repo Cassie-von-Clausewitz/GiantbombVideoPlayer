@@ -18,11 +18,12 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".VideoPlayer.VideoViewActivity"
+            android:name=".Video.Player.VideoViewActivity"
             android:label="@string/title_activity_video_detail"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="landscape">
@@ -47,8 +48,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kyleriedemann.giantbombvideoplayer.MainActivity"/>
         </activity>
-        <activity android:name=".VideoList.VideoListActivity"
-                  android:label="@string/title_video_list" />
+        <activity
+            android:name=".Video.List.VideoListActivity"
+            android:label="@string/title_video_list"/>
+        <activity
+            android:name=".Onboarding.OnboardingActivity"
+            android:label="@string/title_activity_onboarding"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
