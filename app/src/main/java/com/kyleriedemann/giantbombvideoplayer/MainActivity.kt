@@ -1,32 +1,50 @@
 package com.kyleriedemann.giantbombvideoplayer
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.kyleriedemann.giantbombvideoplayer.Authentication.AuthenticationActivity
-import com.kyleriedemann.giantbombvideoplayer.Extensions.startActivity
-import com.kyleriedemann.giantbombvideoplayer.Onboarding.OnboardingActivity
-import com.kyleriedemann.giantbombvideoplayer.Video.List.VideoListActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.kyleriedemann.giantbombvideoplayer.databinding.ActivityMainBinding
+import io.palaima.debugdrawer.DebugDrawer
+import org.koin.android.ext.android.get
+import org.koin.core.parameter.parametersOf
 
 /**
  * garbage activity to launch into different parts of the app during development
  */
 class MainActivity : AppCompatActivity() {
+    private lateinit var drawerLayout: androidx.drawerlayout.widget.DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        onboarding_button.setOnClickListener {
-            startActivity(OnboardingActivity::class)
-        }
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        drawerLayout = binding.drawerLayout
 
-        auth_button.setOnClickListener {
-            startActivity(AuthenticationActivity::class)
-        }
+        val navController = Navigation.findNavController(this, R.id.main_nav_fragment)
 
-        video_button.setOnClickListener {
-            startActivity(VideoListActivity::class)
+        // Set up ActionBar
+        setSupportActionBar(binding.toolbar)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+
+        // Set up bottom_navigation menu
+        binding.navigationView.setupWithNavController(navController)
+
+        get<DebugDrawer> { parametersOf(this) }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(drawerLayout, Navigation.findNavController(this, R.id.main_nav_fragment))
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 }

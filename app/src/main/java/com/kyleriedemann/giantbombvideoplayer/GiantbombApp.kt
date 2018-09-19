@@ -1,17 +1,19 @@
 package com.kyleriedemann.giantbombvideoplayer
 
 import android.app.Application
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.stetho.Stetho
-import com.kyleriedemann.giantbombvideoplayer.DependencyInjection.GiantbombAppModule
-import org.koin.android.ext.android.startAndroidContext
+import com.kyleriedemann.giantbombvideoplayer.di.appModule
+import org.koin.android.ext.android.startKoin
+import timber.log.Timber
 
 class GiantbombApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
         Stetho.initializeWithDefaults(this)
-        Fresco.initialize(this)
-        startAndroidContext(this, GiantbombAppModule())
+        startKoin(this, listOf(appModule))
+
+        // todo inject this in debug module and run callback to plant in debug
+        Timber.plant(Timber.DebugTree())
     }
 }

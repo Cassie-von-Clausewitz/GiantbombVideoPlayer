@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/auth_fragment">
+
+    <activity
+        android:id="@+id/onboarding_activity"
+        android:name="com.kyleriedemann.giantbombvideoplayer.onboarding.OnboardingActivity"
+        android:label="OnboardingActivity" />
+
+    <fragment
+        android:id="@+id/auth_fragment"
+        android:name="com.kyleriedemann.giantbombvideoplayer.auth.AuthenticationFragment"
+        tools:layout="@layout/fragment_authentication" />
+    <fragment
+        android:id="@+id/video_list_fragment"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.list.VideoListFragment"
+        android:label="VideoListFragment"
+        tools:layout="@layout/fragment_video_list" >
+        <action
+            android:id="@+id/action_video_list_fragment_to_videoDetailsFragment"
+            app:destination="@id/videoDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/video_view_fragment"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoViewFragment"
+        android:label="VideoViewFragment"
+        tools:layout="@layout/fragment_video_player"
+        />
+    <fragment
+        android:id="@+id/videoDetailsFragment"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.details.VideoDetailsFragment"
+        android:label="VideoDetailsFragment"
+        tools:layout="@layout/fragment_video_details" >
+        <argument
+            android:name="video"
+            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
+    </fragment>
+</navigation>
