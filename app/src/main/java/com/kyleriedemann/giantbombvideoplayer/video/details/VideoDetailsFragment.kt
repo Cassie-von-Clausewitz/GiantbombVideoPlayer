@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.kyleriedemann.giantbombvideoplayer.databinding.FragmentVideoDetailsBinding
 import org.koin.android.ext.android.inject
@@ -17,6 +18,12 @@ class VideoDetailsFragment: Fragment() {
         val binding = FragmentVideoDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = videoDetailsViewModel
         Glide.with(context!!).load(videoDetailsViewModel.video.videoImage.screenUrl).into(binding.detailImage)
+
+        binding.fab.setOnClickListener {
+            val action = VideoDetailsFragmentDirections.actionVideoDetailsFragmentToVideoViewFragment(videoDetailsViewModel.video)
+            it.findNavController().navigate(action)
+        }
+
         return binding.root
     }
 }

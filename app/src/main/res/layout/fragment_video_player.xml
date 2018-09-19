@@ -1,17 +1,25 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="video"
+            type="com.kyleriedemann.giantbombvideoplayer.video.models.Video"/>
+    </data>
 
-    <VideoView
-        android:id="@+id/video_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/video_buffering_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_gravity="center" />
+        <VideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</FrameLayout>
+        <ProgressBar
+            android:id="@+id/video_buffering_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+</layout>

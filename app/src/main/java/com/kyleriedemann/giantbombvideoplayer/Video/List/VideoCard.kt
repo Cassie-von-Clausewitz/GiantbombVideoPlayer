@@ -1,57 +1,17 @@
-package com.kyleriedemann.giantbombvideoplayer.Video.List
+package com.kyleriedemann.giantbombvideoplayer.video.list
 
-import android.content.Context
-import android.content.Intent
-import android.support.v7.widget.CardView
-import android.util.AttributeSet
-import android.view.View
-import com.airbnb.epoxy.ModelProp
-import com.airbnb.epoxy.ModelView
-import com.kyleriedemann.giantbombvideoplayer.Video.Models.Video
-import com.kyleriedemann.giantbombvideoplayer.Video.Network.Connectivity
 import com.kyleriedemann.giantbombvideoplayer.R
-import com.kyleriedemann.giantbombvideoplayer.Video.Player.VideoViewActivity
-import kotlinx.android.synthetic.main.video_card.view.*
+import com.kyleriedemann.giantbombvideoplayer.video.models.Video
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 
-@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
-class VideoCard(context: Context, attrs: AttributeSet?) : CardView(context, attrs) {
+class VideoCard(val video: Video?): Item() {
 
-    internal var video: Video? = null
+    override fun getLayout() = R.layout.video_card
 
-    init {
-        View.inflate(context, R.layout.video_card, this)
-    }
-
-    @ModelProp
-    fun setVideo(video: Video?) {
-        this.video = video
-
-        video?.let {
-            video_title.text = it.name
-
-//            var deckStr = it.deck
-//            if (deckStr.length > 100) {
-//                deckStr = deckStr.substring(0, 96) + "..."
-//            }
-//            deck.text = deckStr
-
-            val url = it.videoImage.thumbImageUrl.replace(" ".toRegex(), "%20").replace(".png".toRegex(), ".jpg")
-            video_thumbnail.setImageURI(url)
-
-            this.setOnClickListener {
-                val i = Intent(context, VideoViewActivity::class.java)
-                if (Connectivity.isConnectedFast(context)) {
-                    i.putExtra("url", video.highUrl)
-                } else {
-                    i.putExtra("url", video.lowUrl)
-                }
-
-                context.startActivity(i)
-            }
-        }
-    }
-
-    init {
-        View.inflate(context, R.layout.video_card, this)
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+//        viewHolder.video_title.text = video?.name
+//        viewHolder.video_thumbnail.scaleType = ImageView.ScaleType.CENTER_INSIDE
+//        viewHolder.video_thumbnail.setImageURI(Uri.parse(video?.videoImage?.iconUrl))
     }
 }

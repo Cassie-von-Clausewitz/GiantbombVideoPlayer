@@ -1,9 +1,52 @@
 package com.kyleriedemann.giantbombvideoplayer.video.player
 
+import android.media.MediaPlayer
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.danikula.videocache.HttpProxyCacheServer
+import com.kyleriedemann.giantbombvideoplayer.databinding.FragmentVideoPlayerBinding
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class VideoViewFragment: Fragment() {
+    val viewModel by inject<VideoPlayerViewModel> { parametersOf(VideoViewFragmentArgs.fromBundle(arguments).video) }
 
+    val proxy: HttpProxyCacheServer by inject()
+
+    internal lateinit var mediaController: CustomMediaController
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentVideoPlayerBinding.inflate(inflater, container, false)
+
+        mediaController = CustomMediaController(inflater.context)
+        mediaController.setAnchorView(binding.videoView)
+        binding.videoView.setMediaController(mediaController)
+
+        binding.videoView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+
+        binding.videoView.setOnInfoListener { mediaPlayer, what, extra ->
+            if (MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START == what) {
+                binding.videoBufferingSpinner.visibility = View.GONE
+            }
+            if (MediaPlayer.MEDIA_INFO_BUFFERING_START == what) {
+                binding.videoBufferingSpinner.visibility = View.VISIBLE
+            }
+            if (MediaPlayer.MEDIA_INFO_BUFFERING_END == what) {
+                binding.videoBufferingSpinner.visibility = View.VISIBLE
+            }
+            false
+        }
+
+        val proxyUrl = proxy.getProxyUrl(viewModel.getVideoUrl())
+        binding.videoView.setVideoPath(proxyUrl)
+
+        return binding.root
+    }
 }
 
 /*

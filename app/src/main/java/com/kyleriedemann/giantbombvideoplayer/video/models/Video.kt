@@ -1,12 +1,15 @@
 package com.kyleriedemann.giantbombvideoplayer.video.models
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.kyleriedemann.giantbombvideoplayer.video.list.VideoCard
+import com.kyleriedemann.giantbombvideoplayer.video.list.VideoItem
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "video")
 data class Video(
         @PrimaryKey @SerializedName("id") var id: Int = 0,
@@ -24,9 +27,9 @@ data class Video(
         @ColumnInfo(name = "user") @SerializedName("user") var user: String? = "",
         @ColumnInfo(name = "video_type") @SerializedName("video_type") var videoType: String? = "",
         @ColumnInfo(name = "youtube_id") @SerializedName("youtube_id") var youtubeId: String? = "",
-        @ColumnInfo(name = "saved_time") @SerializedName("saved_time") var savedTime: Long = 0
-)
+        @ColumnInfo(name = "saved_time") @SerializedName("saved_time") var savedTime: Float = 0.0f
+): Parcelable
 
-fun Video?.toVideoItem(): VideoCard {
-    return VideoCard(this)
+fun Video?.toVideoItem(): VideoItem {
+    return VideoItem(this ?: Video())
 }

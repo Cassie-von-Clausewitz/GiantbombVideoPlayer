@@ -15,6 +15,7 @@ import com.kyleriedemann.giantbombvideoplayer.video.models.AppDatabase
 import com.kyleriedemann.giantbombvideoplayer.video.models.Video
 import com.kyleriedemann.giantbombvideoplayer.video.network.ApiRepository
 import com.kyleriedemann.giantbombvideoplayer.video.network.GiantbombApiClient
+import com.kyleriedemann.giantbombvideoplayer.video.player.VideoPlayerViewModel
 import inkapplicaitons.android.logger.CompositeLogger
 import inkapplicaitons.android.logger.ConsoleLogger
 import inkapplicaitons.android.logger.Logger
@@ -88,6 +89,8 @@ val appModule = module {
                         .maxCacheSize((1024 * 1024 * 1024).toLong()) // 1 Gb for cache
                         .build()
                 }
+
+                viewModel { (video: Video) -> VideoPlayerViewModel(video, get()) }
             }
 
             module("debug") {

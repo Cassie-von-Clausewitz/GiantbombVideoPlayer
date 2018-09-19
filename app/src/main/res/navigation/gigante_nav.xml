@@ -27,16 +27,26 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/video_view_fragment"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoViewFragment"
-        android:label="VideoViewFragment"
-        tools:layout="@layout/fragment_video_player"
-        />
-    <fragment
         android:id="@+id/videoDetailsFragment"
         android:name="com.kyleriedemann.giantbombvideoplayer.video.details.VideoDetailsFragment"
         android:label="VideoDetailsFragment"
         tools:layout="@layout/fragment_video_details" >
+        <argument
+            android:name="video"
+            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
+        <action
+            android:id="@+id/action_videoDetailsFragment_to_video_view_fragment"
+            app:destination="@id/video_view_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/video_view_fragment"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoViewFragment"
+        android:label="VideoViewFragment"
+        tools:layout="@layout/fragment_video_player">
         <argument
             android:name="video"
             app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />

@@ -1,8 +1,9 @@
 package com.kyleriedemann.giantbombvideoplayer.video.models
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
-@Dao interface VideoDao {
+@Dao
+interface VideoDao {
     @Query("SELECT * FROM video")
     fun selectAll(): List<Video>
 
@@ -12,5 +13,6 @@ import android.arch.persistence.room.*
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun UpdateVideo(vararg video: Video): Int
 
-    @Delete fun deleteVideo(video: Video)
+    @Delete
+    fun deleteVideo(video: Video)
 }

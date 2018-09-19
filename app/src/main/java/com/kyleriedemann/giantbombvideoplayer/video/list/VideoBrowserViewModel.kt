@@ -1,7 +1,7 @@
 package com.kyleriedemann.giantbombvideoplayer.video.list
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.kyleriedemann.giantbombvideoplayer.video.models.Result
 import com.kyleriedemann.giantbombvideoplayer.video.network.ApiRepository
 import kotlinx.coroutines.experimental.Deferred
