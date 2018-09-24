@@ -41,6 +41,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_videoDetailsFragment_to_mediaSessionPlaybackActivity"
+            app:destination="@id/mediaSessionPlaybackActivity" />
+        <action
+            android:id="@+id/action_videoDetailsFragment_to_videoActivity"
+            app:destination="@id/videoActivity" />
     </fragment>
     <fragment
         android:id="@+id/video_view_fragment"
@@ -51,4 +57,26 @@
             android:name="video"
             app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
     </fragment>
+    <activity
+        android:id="@+id/mediaSessionPlaybackActivity"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.MediaSessionPlaybackActivity"
+        android:label="activity_media_playback"
+        tools:layout="@layout/activity_media_playback" >
+        <argument
+            android:name="video"
+            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
+    </activity>
+    <activity
+        android:id="@+id/videoActivity"
+        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoActivity"
+        android:label="VideoActivity" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="position"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </activity>
 </navigation>

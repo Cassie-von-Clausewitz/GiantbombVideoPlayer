@@ -1,13 +1,14 @@
 package com.kyleriedemann.giantbombvideoplayer.video.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.kyleriedemann.giantbombvideoplayer.databinding.FragmentVideoDetailsBinding
+import com.kyleriedemann.giantbombvideoplayer.video.player.VideoActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -20,8 +21,15 @@ class VideoDetailsFragment: Fragment() {
         Glide.with(context!!).load(videoDetailsViewModel.video.videoImage.screenUrl).into(binding.detailImage)
 
         binding.fab.setOnClickListener {
-            val action = VideoDetailsFragmentDirections.actionVideoDetailsFragmentToVideoViewFragment(videoDetailsViewModel.video)
-            it.findNavController().navigate(action)
+//            val action = VideoDetailsFragmentDirections.actionVideoDetailsFragmentToVideoViewFragment(videoDetailsViewModel.video)
+//            it.findNavController().navigate(action)
+
+//            val action = VideoDetailsFragmentDirections.actionVideoDetailsFragmentToMediaSessionPlaybackActivity(videoDetailsViewModel.video)
+//            it.findNavController().navigate(action)
+
+            val intent = Intent(context, VideoActivity::class.java)
+            intent.putExtra(VideoActivity.ARG_VIDEO_URL, videoDetailsViewModel.getVideoUrl())
+            startActivity(intent)
         }
 
         return binding.root

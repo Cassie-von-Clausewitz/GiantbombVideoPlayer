@@ -48,7 +48,7 @@ val appModule = module {
                 val httpClient = OkHttpClient.Builder()
 
                 val interceptor = HttpLoggingInterceptor()
-                interceptor.level = HttpLoggingInterceptor.Level.BODY
+                interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
                 httpClient.addInterceptor(interceptor)
                 httpClient.addInterceptor(StethoInterceptor())
@@ -81,7 +81,7 @@ val appModule = module {
             }
 
             module("details") {
-                viewModel { (video: Video) -> VideoDetailsViewModel(video) }
+                viewModel { (video: Video) -> VideoDetailsViewModel(video, get()) }
             }
 
             module("playback") {

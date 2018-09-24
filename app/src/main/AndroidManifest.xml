@@ -32,6 +32,15 @@
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".video.player.MediaSessionPlaybackActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true" />
+        <activity android:name=".video.player.VideoActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.FullScreen"
+            tools:targetApi="n" />
     </application>
-
 </manifest>
