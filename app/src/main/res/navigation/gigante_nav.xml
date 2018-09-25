@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/auth_fragment">
+    app:startDestination="@id/video_list_fragment">
 
     <activity
         android:id="@+id/onboarding_activity"
@@ -42,9 +42,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_videoDetailsFragment_to_mediaSessionPlaybackActivity"
-            app:destination="@id/mediaSessionPlaybackActivity" />
-        <action
             android:id="@+id/action_videoDetailsFragment_to_videoActivity"
             app:destination="@id/videoActivity" />
     </fragment>
@@ -57,15 +54,6 @@
             android:name="video"
             app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
     </fragment>
-    <activity
-        android:id="@+id/mediaSessionPlaybackActivity"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.MediaSessionPlaybackActivity"
-        android:label="activity_media_playback"
-        tools:layout="@layout/activity_media_playback" >
-        <argument
-            android:name="video"
-            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
-    </activity>
     <activity
         android:id="@+id/videoActivity"
         android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoActivity"

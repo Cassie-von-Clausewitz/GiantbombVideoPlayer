@@ -118,8 +118,8 @@ dependencies {
     implementation 'com.github.InkApplications:guava-stopwatch:21.0'
     implementation 'com.github.kylealanr:GestureDetectors:1.1'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.24.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.24.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.26.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.26.1'
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'

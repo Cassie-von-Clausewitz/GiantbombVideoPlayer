@@ -76,7 +76,7 @@ val appModule = module {
             }
 
             module("browse") {
-                single { ApiRepository(get(), get(), get(), get()) }
+                single { ApiRepository(get(), get(), get()) }
                 viewModel { VideoBrowserViewModel(get(), get()) }
             }
 

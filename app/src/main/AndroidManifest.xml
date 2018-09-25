@@ -32,9 +32,6 @@
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".video.player.MediaSessionPlaybackActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
-            android:supportsPictureInPicture="true" />
         <activity android:name=".video.player.VideoActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"

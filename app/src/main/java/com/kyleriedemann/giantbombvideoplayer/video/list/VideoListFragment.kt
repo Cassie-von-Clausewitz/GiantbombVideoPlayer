@@ -11,7 +11,9 @@ import com.kyleriedemann.giantbombvideoplayer.databinding.FragmentVideoListBindi
 import com.kyleriedemann.giantbombvideoplayer.extension.GroupieAdapter
 import com.kyleriedemann.giantbombvideoplayer.video.models.toVideoItem
 import com.xwray.groupie.Section
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.android.Main
 import kotlinx.coroutines.experimental.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.Koin.Companion.logger
@@ -42,9 +44,9 @@ class VideoListFragment: Fragment() {
         binding.recyclerView.adapter = groupAdapter
         binding.recyclerView.layoutManager = GridLayoutManager(context, groupAdapter.spanCount)
 
-        launch(UI) {
-            val videos = viewModel.getVideos().await()
-            logger.info("Videos [${videos.results}]")
+        GlobalScope.launch(Dispatchers.Main) {
+            val videos = viewModel.getVideos()
+            logger.info("Videos [${videos.results.size}]")
 
             val section = Section()
             section.addAll(videos.results.map { it.toVideoItem() })
