@@ -30,7 +30,7 @@ class ApiRepository(private val giantbombApiClient: GiantbombApiClient, private 
         return videos
     }
 
-    suspend inline fun cachedDataOrNetworkFallback(db: ReceiveChannel<List<Video>>, network: ReceiveChannel<Result>, videoDao: VideoDao): Result? {
+    private suspend inline fun cachedDataOrNetworkFallback(db: ReceiveChannel<List<Video>>, network: ReceiveChannel<Result>, videoDao: VideoDao): Result? {
         return select {
             db.onReceiveOrNull {
                 Timber.i("onReceive from db [${it?.size}]")
