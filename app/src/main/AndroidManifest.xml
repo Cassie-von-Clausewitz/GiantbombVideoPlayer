@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.kyleriedemann.giantbombvideoplayer"
+          package="com.wyrmix.giantbombvideoplayer"
           tools:ignore="InnerclassSeparator">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -12,14 +12,14 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <application
-        android:name=".GiantbombApp"
+        android:name="com.wyrmix.giantbombvideoplayer.GiantbombApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name="com.wyrmix.giantbombvideoplayer.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,11 +28,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".onboarding.OnboardingActivity"
+            android:name="com.wyrmix.giantbombvideoplayer.onboarding.OnboardingActivity"
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".video.player.VideoActivity"
+        <activity android:name="com.wyrmix.giantbombvideoplayer.video.player.VideoActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"

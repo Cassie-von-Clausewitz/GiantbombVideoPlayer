@@ -16,12 +16,13 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/auth_fragment"
-        android:title="@string/title_activity_authentication"/>
-    <item
-        android:id="@+id/video_list_fragment"
-        android:title="@string/title_video_list"/>
-
+    <item android:id="@+id/home_fragment"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_home" />
+    <item android:id="@+id/downloads_fragment"
+        android:title="@string/title_downloads"
+        android:icon="@drawable/ic_download" />
+    <item android:id="@+id/settings_fragment"
+        android:title="@string/title_settings"
+        android:icon="@drawable/ic_menu" />
 </menu>

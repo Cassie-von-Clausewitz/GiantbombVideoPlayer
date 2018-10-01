@@ -2,7 +2,7 @@
     <data>
         <variable
             name="video"
-            type="com.kyleriedemann.giantbombvideoplayer.video.models.Video"/>
+            type="com.wyrmix.giantbombvideoplayer.video.models.Video"/>
     </data>
 
     <FrameLayout

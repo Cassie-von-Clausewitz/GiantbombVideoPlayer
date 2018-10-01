@@ -34,7 +34,7 @@
                 android:linksClickable="false"
                 android:text="@string/auth_url"
                 android:textAlignment="center"
-                android:textColorLink="@color/accent"
+                android:textColorLink="@color/secondaryLightColor"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

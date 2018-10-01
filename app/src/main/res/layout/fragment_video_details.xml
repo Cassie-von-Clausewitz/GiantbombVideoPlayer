@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kyleriedemann.giantbombvideoplayer.video.details.VideoDetailsViewModel" />
+            type="com.wyrmix.giantbombvideoplayer.video.details.VideoDetailsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

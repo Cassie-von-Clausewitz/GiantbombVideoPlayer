@@ -16,6 +16,10 @@
     <string name="title_activity_authentication">Authenticate</string>
     <string name="title_video_list">Videos</string>
 
+    <string name="title_home">Home</string>
+    <string name="title_downloads">Downloads</string>
+    <string name="title_settings">Settings</string>
+
     <string-array name="navigation_drawer_items">
         <item>Videos</item>
         <item>Authentication</item>
@@ -58,7 +62,6 @@
     <!-- Accessibility -->
     <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">Picture of plant</string>
     <string name="title_activity_garden_bottom_nav">GardenBottomNav</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 

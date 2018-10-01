@@ -2,20 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/video_list_fragment">
+    app:startDestination="@id/home_fragment">
 
     <activity
         android:id="@+id/onboarding_activity"
-        android:name="com.kyleriedemann.giantbombvideoplayer.onboarding.OnboardingActivity"
+        android:name="com.wyrmix.giantbombvideoplayer.onboarding.OnboardingActivity"
         android:label="OnboardingActivity" />
 
     <fragment
         android:id="@+id/auth_fragment"
-        android:name="com.kyleriedemann.giantbombvideoplayer.auth.AuthenticationFragment"
+        android:name="com.wyrmix.giantbombvideoplayer.auth.AuthenticationFragment"
         tools:layout="@layout/fragment_authentication" />
     <fragment
-        android:id="@+id/video_list_fragment"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.list.VideoListFragment"
+        android:id="@+id/home_fragment"
+        android:name="com.wyrmix.giantbombvideoplayer.video.list.VideoListFragment"
         android:label="VideoListFragment"
         tools:layout="@layout/fragment_video_list" >
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/videoDetailsFragment"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.details.VideoDetailsFragment"
+        android:name="com.wyrmix.giantbombvideoplayer.video.details.VideoDetailsFragment"
         android:label="VideoDetailsFragment"
         tools:layout="@layout/fragment_video_details" >
         <argument
             android:name="video"
-            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
+            app:argType="com.wyrmix.giantbombvideoplayer.video.models.Video" />
         <action
             android:id="@+id/action_videoDetailsFragment_to_video_view_fragment"
             app:destination="@id/video_view_fragment"
@@ -47,17 +47,18 @@
     </fragment>
     <fragment
         android:id="@+id/video_view_fragment"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoViewFragment"
+        android:name="com.wyrmix.giantbombvideoplayer.video.player.VideoViewFragment"
         android:label="VideoViewFragment"
         tools:layout="@layout/fragment_video_player">
         <argument
             android:name="video"
-            app:argType="com.kyleriedemann.giantbombvideoplayer.video.models.Video" />
+            app:argType="com.wyrmix.giantbombvideoplayer.video.models.Video" />
     </fragment>
     <activity
         android:id="@+id/videoActivity"
-        android:name="com.kyleriedemann.giantbombvideoplayer.video.player.VideoActivity"
-        android:label="VideoActivity" >
+        android:name="com.wyrmix.giantbombvideoplayer.video.player.VideoActivity"
+        android:label="VideoActivity"
+        tools:layout="@layout/activity_video">
         <argument
             android:name="url"
             app:argType="string"
@@ -67,4 +68,22 @@
             app:argType="long"
             android:defaultValue="0L" />
     </activity>
+    <fragment
+        android:id="@+id/downloads_fragment"
+        android:name="com.wyrmix.giantbombvideoplayer.downloads.DownloadsFragment"
+        android:label="DownloadsFragment"
+        tools:layout="@layout/fragment_downloads">
+        <action
+            android:id="@+id/action_downloadsFragment_to_videoDetailsFragment"
+            app:destination="@id/videoDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.wyrmix.giantbombvideoplayer.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_auth_fragment"
+            app:destination="@id/auth_fragment" />
+    </fragment>
 </navigation>
